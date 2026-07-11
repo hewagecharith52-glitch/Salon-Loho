@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Salon Looha</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    #preloader {
+      display: none !important;
+    }
+  </style>
+  <script>
+    if (sessionStorage.getItem('homeLoaderSeen') !== 'true') {
+      const style = document.createElement('style');
+      style.innerHTML = '#preloader { display: flex !important; }';
+      document.head.appendChild(style);
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Work+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet">
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#1a1c1a",
+            "on-primary-fixed-variant": "#3f4b2f",
+            "inverse-on-surface": "#f1f1ed",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#dde6ce",
+            "on-primary": "#ffffff",
+            "primary": "#566345",
+            "secondary": "#59614e",
+            "on-tertiary-fixed-variant": "#3f4b2f",
+            "on-background": "#1a1c1a",
+            "tertiary": "#566345",
+            "background": "#faf9f5",
+            "primary-fixed-dim": "#bdcca8",
+            "tertiary-fixed": "#d9e8c2",
+            "surface": "#faf9f5",
+            "on-tertiary-container": "#3f4b30",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#414938",
+            "primary-container": "#adbb98",
+            "on-primary-container": "#3f4b30",
+            "on-error-container": "#93000a",
+            "surface-container-highest": "#e2e3df",
+            "surface-container-low": "#f4f4f0",
+            "surface-dim": "#dadad6",
+            "inverse-surface": "#2f312e",
+            "surface-tint": "#566345",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#5f6754",
+            "surface-container-high": "#e8e8e4",
+            "surface-container": "#eeeeea",
+            "on-secondary-fixed": "#171e0f",
+            "secondary-fixed-dim": "#c1cab3",
+            "primary-fixed": "#d9e8c2",
+            "inverse-primary": "#bdcca8",
+            "tertiary-container": "#adbb98",
+            "surface-variant": "#e2e3df",
+            "surface-bright": "#faf9f5",
+            "on-surface-variant": "#45483f",
+            "secondary-fixed": "#dde6ce",
+            "outline-variant": "#c6c8bc",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#141f08",
+            "tertiary-fixed-dim": "#bdcca8",
+            "outline": "#76786e",
+            "on-tertiary-fixed": "#141f08",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Playfair Display", "serif"],
+            "display": ["Playfair Display", "serif"],
+            "body": ["Work Sans", "sans-serif"],
+            "label": ["Work Sans", "sans-serif"]
+          }
+        },
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    #booking-modal,
+    #popup-gallery {
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #booking-modal-content,
+    #popup-gallery-content {
+      transition: transform 0.4s ease, max-width 0.4s ease;
+    }
+
+    .bw-hover {
+      transition: filter 0.5s ease;
+      filter: grayscale(0%);
+    }
+
+    .bw-hover:hover {
+      filter: grayscale(100%);
+    }
+
+    .bw-to-color {
+      transition: filter 0.5s ease;
+      filter: grayscale(100%);
+    }
+
+    .bw-to-color:hover {
+      filter: grayscale(0%);
+    }
+
+    .price-list-pulse {
+      animation: pulse-green 2s infinite ease-in-out;
+      background-color: #E8F5E9;
+      color: #2E7D32;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      border: 2px solid #2E7D32;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    @keyframes pulse-green {
+      0% {
+        box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(46, 125, 50, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(46, 125, 50, 0);
+      }
+    }
+
+    .price-list-pulse:hover {
+      transform: scale(1.05);
+      background-color: #2E7D32;
+      color: #ffffff;
+    }
+
+    @keyframes white-pulse-glow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    .hero-white-glow-btn {
+      animation: white-pulse-glow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes map-green-pulse {
+      0% {
+        box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6);
+      }
+
+      50% {
+        box-shadow: 0 10px 35px 10px rgba(173, 187, 152, 0.95);
+      }
+
+      100% {
+        box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6);
+      }
+    }
+
+    .map-pulse-glow {
+      animation: map-green-pulse 3s infinite ease-in-out;
+    }
+
+    .text-premium-backdrop {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    /* Unified Smooth Transition Styling */
+    .fade-transition {
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+
+    .fade-in {
+      opacity: 1 !important;
+    }
+
+    .fade-out {
+      opacity: 0 !important;
+    }
+
+    /* Premium Section Headers Horizontal Drifting Engine */
+    .luxury-float-header {
+      display: inline-block;
+      animation: headerHorizontalDrift 8s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    @keyframes headerHorizontalDrift {
+
+      0%,
+      100% {
+        transform: translateX(0px);
+      }
+
+      50% {
+        transform: translateX(12px);
+      }
+    }
+
+    #services-section .luxury-float-header {
+      animation-duration: 7.5s;
+      animation-delay: 0s;
+    }
+
+    #experts .luxury-float-header {
+      animation-duration: 9s;
+      animation-delay: 0.3s;
+    }
+
+    #reviews .luxury-float-header {
+      animation-duration: 8s;
+      animation-delay: 0.1s;
+    }
+
+    #about-section .luxury-float-header {
+      animation-duration: 8.5s;
+      animation-delay: 0.4s;
+    }
+
+    /* ⚡ BULLETPROOF POP-UP ITEM HIDDEN ENGINE ⚡ */
+    .popup-item {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .popup-item.hidden-popup-item {
+      display: none !important;
+      opacity: 0;
+      transform: scale(0.9);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .main-tab-btn.active-tab,
+    .filter-btn.active-tab {
+      background-color: #adbb98;
+      color: white;
+      border-color: #adbb98;
+    }
+
+    .popup-item img {
+      filter: none !important;
+      transition: transform 0.3s;
+    }
+
+    .popup-item:hover {
+      transform: scale(1.05);
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.98);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 1rem;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      padding: 20px;
+      z-index: 10001;
+      background: transparent;
+      border: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      z-index: 10001;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-white text-[#1a1c1a] font-body antialiased selection:bg-[#adbb98] selection:text-white overflow-x-hidden fade-transition">
+
+  <div id="preloader"
+    class="fixed inset-0 z-[200] bg-[#aeb996] flex flex-col items-center justify-center transition-opacity duration-[1.2s] ease-[cubic-bezier(0.19,1,0.22,1)]">
+    <img
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
+      alt="Salon Looha Logo" class="w-32 md:w-40 h-auto object-contain mix-blend-multiply mb-8 opacity-90">
+    <div class="flex flex-col items-center gap-4 w-48 md:w-64">
+      <div class="w-full h-[1px] bg-[#1a1c1a]/20 rounded-full overflow-hidden relative">
+        <div id="progress-bar"
+          class="absolute top-0 left-0 bottom-0 bg-[#1a1c1a] w-0 transition-all duration-[75ms] ease-linear"></div>
+      </div>
+      <div id="counter-text" class="font-label text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-[#1a1c1a]">
+        0%</div>
+    </div>
+  </div>
+
+  <div class="fixed inset-0 z-[100] pointer-events-none border-[20px] border-white rounded-[52px]"></div>
+
+  <div class="absolute inset-0 z-0 bg-white">
+    <div class="absolute inset-[20px] rounded-[32px] overflow-hidden">
+      <video id="hero-video" autoplay loop muted playsinline
+        class="relative z-0 w-full h-full object-cover opacity-[0.85]">
+        <source src="Hero-Video/destination-wedding.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <main class="relative z-10 w-full px-[20px] pt-[20px] pb-[20px]">
+
+    <div id="nav-wrapper"
+      class="sticky top-[20px] left-0 right-0 z-50 flex justify-center w-full px-4 lg:px-12 pt-6 pointer-events-none transition-all duration-1000 ease-out">
+      <!-- FIXED: Backdrop blur and responsive classes applied natively -->
+      <nav id="floating-navbar"
+        class="w-full max-w-[1280px] bg-white/70 backdrop-blur-md rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.06)] px-6 lg:px-10 py-4 flex justify-between items-center pointer-events-auto border border-black/5 transition-all duration-500">
+        <a class="font-headline text-xl font-bold tracking-[0.2em] text-[#1a1c1a]" href="#">
+          <img id="nav-logo"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
+            alt="Salon Looha Logo" class="h-12 w-auto object-contain mix-blend-multiply transition-all duration-500">
+        </a>
+        <div class="hidden lg:flex gap-10 items-center">
+          <a class="nav-link text-[#1a1c1a] border-b-[2px] border-[#adbb98] pb-0.5 font-label text-xs uppercase font-bold tracking-[0.15em] transition-all duration-500"
+            href="#">Home</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-all duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="#services-section">Services</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-all duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="#experts">Experts</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-all duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="#reviews">Reviews</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-all duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="#gallery-section">Gallery</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-all duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="about.html#dimalka">About</a>
+        </div>
+        <div class="flex items-center gap-6">
+          <button id="open-booking-btn-nav"
+            class="bg-[#adbb98] text-white hover:bg-[#9cae86] transition-all duration-500 px-8 py-3 rounded-full font-label text-xs font-bold tracking-[0.15em] uppercase shadow-md hover:-translate-y-0.5 inline-block cursor-pointer">
+            Book Appointment
+          </button>
+          <button id="nav-menu-btn" class="lg:hidden text-[#1a1c1a] transition-colors duration-500">
+            <span class="material-symbols-outlined text-3xl">menu</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <div class="relative w-full min-h-[calc(100vh-40px-100px)] flex flex-col rounded-t-[32px] overflow-hidden mt-2"
+      data-nav-theme="dark">
+      <div id="hero-content"
+        class="flex-1 flex flex-col justify-center w-full max-w-[1280px] mx-auto px-8 lg:px-16 relative z-10 pb-20 mt-16 lg:mt-0 transition-all duration-[1.5s] ease-out">
+        <div class="max-w-4xl mx-auto flex flex-col gap-8 items-center text-center">
+          <div class="text-premium-backdrop px-8 py-10 md:px-12 md:py-12 rounded-[28px] shadow-[0_10px_40px_rgba(0,0,0,0.04)] max-w-3xl mx-auto flex flex-col gap-6">
+            <h1 id="kinetic-title"
+              class="font-display text-5xl lg:text-7xl font-bold text-[#1a1c1a] leading-[1.1] tracking-tight">
+              Your Dream Wedding,<br>Anywhere.
+            </h1>
+            <p class="font-body text-lg text-[#1a1c1a]/85 leading-relaxed font-medium">
+              Expert bridal
+              styling, curated for your destination wedding – bringing luxury beauty services to your dream location,
+              anywhere in the world.</p>
+          </div>
+          <div class="pt-2 flex justify-center w-full">
+            <button id="open-booking-btn-hero"
+              class="border-2 border-white hero-white-glow-btn px-12 py-5 text-sm md:text-base tracking-[0.2em] bg-[#adbb98] text-white rounded-full hover:bg-[#9cae86] transition-all shadow-xl hover:-translate-y-1 cursor-pointer font-bold font-label uppercase">Plan
+              Your Destination Wedding</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <section id="services-section" class="bg-white py-24 lg:py-32" data-nav-theme="light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-24">
+        <div class="text-center mb-16">
+          <h2
+            class="luxury-float-header font-headline text-3xl lg:text-4xl font-bold text-[#1a1c1a] mb-4 tracking-tight">
+            Signature Salon Services</h2>
+          <p class="font-body text-[#1a1c1a]/80 max-w-2xl mx-auto">Tailored treatments crafted to enhance your unique
+            beauty.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <button data-service="Master Haircut"
+            class="service-explore-btn w-full text-left group bg-transparent rounded-2xl overflow-hidden border-2 border-[#adbb98] hover:bg-[#adbb98]/5 hover:shadow-[0_10px_30px_rgba(173,187,152,0.85)] hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer">
+            <div class="h-48 overflow-hidden flex-shrink-0"><img
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                src="images/haircut.jpg"></div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-headline text-xl font-semibold text-[#1a1c1a] mb-2">Master Haircut</h3>
+              <p class="font-body text-sm text-[#1a1c1a]/80 leading-relaxed mb-4">Precision cuts, bespoke coloring, and
+                restorative treatments customized to your hair's architecture.</p>
+              <div
+                class="flex justify-between items-center text-[#adbb98] font-label text-sm uppercase tracking-wider font-semibold mt-auto pt-4">
+                <span>Explore</span><span
+                  class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </div>
+            </div>
+          </button>
+          <button data-service="Bridal & Grooming"
+            class="service-explore-btn w-full text-left group bg-transparent rounded-2xl overflow-hidden border-2 border-[#adbb98] hover:bg-[#adbb98]/5 hover:shadow-[0_10px_30px_rgba(173,187,152,0.85)] hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer">
+            <div class="h-48 overflow-hidden flex-shrink-0"><img
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                src="images/bridal.jpg"></div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-headline text-xl font-semibold text-[#1a1c1a] mb-2">Bridal & Grooming</h3>
+              <p class="font-body text-sm text-[#1a1c1a]/80 leading-relaxed mb-4">Elegant bridal transformations and
+                premium men's grooming journeys ensuring you look flawlessly sharp.</p>
+              <div
+                class="flex justify-between items-center text-[#adbb98] font-label text-sm uppercase tracking-wider font-semibold mt-auto pt-4">
+                <span>Explore</span><span
+                  class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </div>
+            </div>
+          </button>
+          <button data-service="Nail Artistry"
+            class="service-explore-btn w-full text-left group bg-transparent rounded-2xl overflow-hidden border-2 border-[#adbb98] hover:bg-[#adbb98]/5 hover:shadow-[0_10px_30px_rgba(173,187,152,0.85)] hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer">
+            <div class="h-48 overflow-hidden flex-shrink-0"><img
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                src="images/nails.jpg"></div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-headline text-xl font-semibold text-[#1a1c1a] mb-2">Nail Artistry</h3>
+              <p class="font-body text-sm text-[#1a1c1a]/80 leading-relaxed mb-4">Luxury manicures, custom gel
+                extensions, and intricate nail art designed to complement your personal style.</p>
+              <div
+                class="flex justify-between items-center text-[#adbb98] font-label text-sm uppercase tracking-wider font-semibold mt-auto pt-4">
+                <span>Explore</span><span
+                  class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </div>
+            </div>
+          </button>
+          <button data-service="Complete Transformation"
+            class="service-explore-btn w-full text-left group bg-transparent rounded-2xl overflow-hidden border-2 border-[#adbb98] hover:bg-[#adbb98]/5 hover:shadow-[0_10px_30px_rgba(173,187,152,0.85)] hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer">
+            <div class="h-48 overflow-hidden flex-shrink-0"><img
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                src="images/transformation.jpg"></div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-headline text-xl font-semibold text-[#1a1c1a] mb-2">Complete Transformation</h3>
+              <p class="font-body text-sm text-[#1a1c1a]/80 leading-relaxed mb-4">A curated, full-day VIP pampering and
+                makeover experience resulting in a dramatic restyling.</p>
+              <div
+                class="flex justify-between items-center text-[#adbb98] font-label text-sm uppercase tracking-wider font-semibold mt-auto pt-4">
+                <span>Explore</span><span
+                  class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experts -->
+    <section id="experts" class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="luxury-float-header font-display text-4xl font-bold mb-12">Meet Our Experts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div
+            class="p-8 border rounded-3xl shadow-sm hover:shadow-[0_10px_30px_rgba(173,187,152,0.85)] hover:-translate-y-1 transition-all duration-300 bg-white">
+            <img src="profile-photos/dimalka.jpeg" class="w-24 h-24 rounded-full mx-auto object-cover mb-4">
+            <h3 class="text-xl font-bold">Dimalka Nuwanthi</h3>
+            <p class="text-xs text-[#adbb98] font-bold uppercase tracking-widest mb-4">Founder & Master Stylist</p>
+            <p class="text-gray-600 text-sm mb-6">Expert in bridal transformations and advanced nail care with over a
+              decade of experience.</p>
+            <a href="about.html#dimalka"
+              class="inline-block border border-black px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-[#adbb98] hover:text-white hover:border-[#adbb98] transition-all duration-300">View
+              Profile</a>
+          </div>
+          <div
+            class="p-8 border rounded-3xl shadow-sm hover:shadow-[0_10px_30px_rgba(173,187,152,0.85)] hover:-translate-y-1 transition-all duration-300 bg-white">
+            <img src="profile-photos/sadee.jpeg" class="w-24 h-24 rounded-full mx-auto object-cover mb-4">
+            <h3 class="text-xl font-bold">Sadee Subandriyo</h3>
+            <p class="text-xs text-[#adbb98] font-bold uppercase tracking-widest mb-4">Ladies Hair Specialist</p>
+            <p class="text-gray-600 text-sm mb-6">Specializing in stunning, modern hair aesthetics and advanced cutting
+              techniques.</p>
+            <a href="about.html#sadee"
+              class="inline-block border border-black px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-[#adbb98] hover:text-white hover:border-[#adbb98] transition-all duration-300">View
+              Profile</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="bg-[#adbb98] text-white py-24 lg:py-32" data-nav-theme="dark">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-24">
+        <div class="text-center mb-16">
+          <h2 class="luxury-float-header font-headline text-3xl lg:text-4xl font-bold text-white mb-4 tracking-tight">
+            What Our Clients Say</h2>
+        </div>
+        <div class="max-w-5xl mx-auto">
+          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <div class="elfsight-app-18fed60e-552b-4300-94fd-fadde9652602" data-elfsight-app-lazy></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery-section" class="bg-white py-24 lg:py-32" data-nav-theme="light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-24">
+        <div class="text-center mb-6 flex flex-col items-center">
+          <span class="material-symbols-outlined text-4xl text-[#1a1c1a] mb-4">photo_camera</span>
+          <h2
+            class="luxury-float-header font-headline text-3xl lg:text-4xl font-bold text-[#1a1c1a] mb-4 tracking-tight">
+            The Looha Lookbook</h2>
+          <a class="font-label text-sm uppercase tracking-widest text-[#1a1c1a] hover:opacity-70 transition-colors border-b border-[#1a1c1a] pb-1"
+            href="#">@SalonLooha</a>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 mt-6">
+          <button
+            class="main-tab-btn active-tab px-6 py-2 rounded-full border-2 border-[#adbb98] text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+            data-target="bridal">Bridal Shoot</button>
+          <button
+            class="main-tab-btn px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider hover:border-[#adbb98] transition-all duration-300 cursor-pointer"
+            data-target="party">Party Styling</button>
+          <button
+            class="main-tab-btn px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider hover:border-[#adbb98] transition-all duration-300 cursor-pointer"
+            data-target="nails">Nail Artistry</button>
+          <button
+            class="main-tab-btn px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider hover:border-[#adbb98] transition-all duration-300 cursor-pointer"
+            data-target="hair">Hair Aesthetics</button>
+        </div>
+
+        <!-- 4-Image Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-4 md:px-0">
+          <div class="aspect-square rounded-xl overflow-hidden group bw-to-color"><img id="preview-img-1"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              src="lookbook/bridal/bridal-1.webp"></div>
+          <div class="aspect-square rounded-xl overflow-hidden group bw-to-color"><img id="preview-img-2"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              src="lookbook/bridal/bridal-2.webp"></div>
+          <div class="aspect-square rounded-xl overflow-hidden group bw-to-color"><img id="preview-img-3"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              src="lookbook/bridal/bridal-3.webp"></div>
+          <div onclick="openGalleryPopup()"
+            class="aspect-square rounded-xl overflow-hidden group relative cursor-pointer">
+            <img id="preview-img-4"
+              class="w-full h-full object-cover group-hover:scale-110 grayscale group-hover:grayscale-0 transition-all duration-700"
+              src="lookbook/bridal/bridal-4.webp">
+            <div
+              class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex flex-col items-center justify-center text-white p-4">
+              <span class="material-symbols-outlined text-4xl animate-bounce mb-2">arrow_forward</span>
+              <p class="font-label text-xs uppercase font-bold tracking-[0.2em]">View Lookbook</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sanctuary Visit Details Container -->
+    <section id="about-section" class="bg-white py-24 lg:py-32 border-t border-on-surface/10" data-nav-theme="light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="flex flex-col gap-8">
+          <h2 class="luxury-float-header font-headline text-3xl lg:text-4xl font-bold text-[#1a1c1a] tracking-tight">
+            Visit Our Sanctuary</h2>
+          <div class="flex flex-col gap-6">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#adbb98] mt-1">location_on</span>
+              <div>
+                <p class="font-body text-lg text-[#1a1c1a]">Ave Maria Rd, Negombo 11410</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-[#adbb98]">schedule</span>
+              <p class="font-body text-lg text-[#1a1c1a]">Monday – Sunday, 10am – 8pm</p>
+            </div>
+          </div>
+          <div class="pt-4">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Salon+Looha+Negombo&destination_place_id=ChIJ-Y-95bd0e8830467"
+              target="_blank"
+              class="inline-block bg-white text-[#adbb98] border-2 border-[#adbb98] hover:bg-[#adbb98] hover:text-white transition-all px-8 py-4 rounded-full font-label text-base font-semibold tracking-wide uppercase text-center cursor-pointer">GET
+              DIRECTIONS</a>
+          </div>
+        </div>
+        <div
+          class="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-on-surface/5 map-pulse-glow">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.298188188157!2d79.84045737499645!3d7.212451615655447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2ef01549acaad%3A0x60995bd0e8830467!2sSalon%20looha!5e0!3m2!1sen!2slk!4v1720630650942!5m2!1sen!2slk"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="bg-[#adbb98] text-white w-full pt-24 pb-8 border-t border-white/20" data-nav-theme="dark">
+      <div
+        class="max-w-[1200px] mx-auto px-6 lg:px-24 w-full flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+        <div class="max-w-sm">
+          <a class="block mb-6" href="#"><img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
+              alt="Salon Looha Logo" class="h-24 w-auto object-contain"></a>
+          <p class="font-body text-white/80 text-sm leading-relaxed mb-6">A sanctuary of style and rejuvenation.
+            Redefining modern luxury through organic practices and unparalleled expertise.</p>
+          <div class="flex gap-4">
+            <a class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+              href="#"><span class="material-symbols-outlined text-[20px]">camera_alt</span></a>
+            <a class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+              href="#"><span class="material-symbols-outlined text-[20px]">share</span></a>
+            <a class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+              href="#"><span class="material-symbols-outlined text-[20px]">mail</span></a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-12 w-full md:w-auto">
+          <div class="flex flex-col gap-4">
+            <h5 class="font-label text-xs uppercase tracking-widest text-white/60 mb-2">Explore</h5>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Services</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Our Team</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Gallery</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Contact</a>
+            <div data-aos="fade-right" data-aos-duration="1000" data-aos-offset="300">
+              <a class="font-body price-list-pulse mt-2 text-sm uppercase tracking-wider text-white"
+                href="price_list.pdf" target="_blank">PRICE LIST</a>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <h5 class="font-label text-xs uppercase tracking-widest text-white/60 mb-2">Legal</h5>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Privacy Policy</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Terms of Service</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Cancellation</a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-[1200px] mx-auto px-6 lg:px-24 w-full pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-label text-xs text-white/60 uppercase tracking-wider">© 2024 SALON LOOHA. DESIGNED FOR DISCERNING
+          CLIENTS.</p>
+        <p class="font-label text-xs text-white/60 uppercase tracking-wider">Los Angeles, CA</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- 🌟 HIGH-END FULLSCREEN POP-UP LOOKBOOK GALLERY LIGHTBOX 🌟 -->
+  <div id="popup-gallery"
+    class="fixed inset-0 z-[160] bg-black/70 opacity-0 invisible flex items-center justify-center p-4 md:p-10 backdrop-blur-md transition-all duration-400 overflow-hidden">
+    <div id="popup-gallery-content"
+      class="bg-[#faf9f5] w-full max-w-[1280px] h-[90vh] rounded-[2.5rem] shadow-2xl overflow-hidden scale-95 relative flex flex-col p-6 md:p-10 transition-all duration-400">
+
+      <!-- Close Button -->
+      <button id="close-gallery-btn"
+        class="absolute top-6 right-6 w-12 h-12 rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-black z-50 cursor-pointer">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <!-- Header Inside Pop-up -->
+      <div class="text-center mb-4 flex-shrink-0">
+        <h3 class="font-headline text-2xl md:text-3xl font-bold text-[#1a1c1a]">The Looha Lookbook</h3>
+        <p class="font-body text-xs text-[#1a1c1a]/50 mt-0.5 uppercase tracking-wider">Select a collection to filter
+          curated transformations</p>
+      </div>
+
+      <!-- Filter Buttons Inside Pop-up Gallery Layer -->
+      <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 flex-shrink-0">
+        <button
+          class="filter-btn active-tab px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+          data-filter="bridal">Bridal Shoot</button>
+        <button
+          class="filter-btn px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+          data-filter="party">Party Styling</button>
+        <button
+          class="filter-btn px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+          data-filter="nails">Nail Artistry</button>
+        <button
+          class="filter-btn px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+          data-filter="hair">Hair Aesthetics</button>
+      </div>
+
+      <!-- Pop-up Grid Container (Scrollable) -->
+      <div class="flex-1 overflow-y-auto pr-2 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6" id="popup-grid-wrapper">
+        <!-- Bridal Collection (1-20) -->
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-1.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-2.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-3.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-4.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-5.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-6.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-7.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-8.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-9.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-10.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-11.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-12.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-13.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-14.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-15.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-16.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-17.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-18.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-19.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
+            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-20.webp"></div>
+
+        <!-- Party Collection (1-20) -->
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-1.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-2.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-3.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-4.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-5.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-6.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-7.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-8.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-9.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-10.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-11.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-12.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-13.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-14.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-15.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-16.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-17.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-18.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-19.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
+            class="w-full h-full object-cover" src="lookbook/party/photos/party-20.webp"></div>
+
+        <!-- Nails Collection (1-20) -->
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-1.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-2.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-3.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-4.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-5.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-6.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-7.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-8.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-9.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-10.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-11.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-12.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-13.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-14.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-15.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-16.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-17.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-18.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-19.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
+            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-20.webp"></div>
+
+        <!-- Hair Collection (1-20) -->
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-1.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-2.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-3.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-4.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-5.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-6.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-7.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-8.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-9.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-10.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-11.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-12.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-13.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-14.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-15.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-16.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-17.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-18.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-19.webp"></div>
+        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
+            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-20.webp"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Booking Modal Container -->
+  <div id="booking-modal"
+    class="fixed inset-0 z-[150] bg-black/60 opacity-0 invisible flex items-center justify-center p-4 backdrop-blur-md transition-all duration-400">
+    <div id="booking-modal-content"
+      class="bg-[#faf9f5] w-full max-w-[600px] rounded-[2.5rem] shadow-2xl border border-black/5 overflow-hidden scale-95 relative max-h-[90vh] flex flex-col md:flex-row transition-all duration-400">
+      <div id="modal-slider-panel" class="hidden md:w-1/2 relative h-[300px] md:h-auto overflow-hidden bg-black/5">
+        <img id="slider-before-img" src="" alt="Before" class="absolute inset-0 w-full h-full object-cover">
+        <img id="slider-after-img" src="" alt="After" class="absolute inset-0 w-full h-full object-cover"
+          style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
+        <div id="slider-split-bar" class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-20 shadow-lg"
+          style="left: 50%;">
+          <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-xl border border-black/10">
+            <span class="material-symbols-outlined text-[#1a1c1a] text-sm select-none">unfold_more</span>
+          </div>
+        </div>
+        <input type="range" id="clip-range-slider" min="0" max="100" value="50"
+          class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30">
+      </div>
+
+      <div class="flex-1 p-8 lg:p-10 overflow-y-auto max-h-[90vh]">
+        <button id="close-booking-btn"
+          class="absolute top-6 right-6 w-10 h-10 rounded-full bg-[#1a1c1a]/5 hover:bg-[#1a1c1a]/10 transition-colors flex items-center justify-center text-[#1a1c1a] z-50 cursor-pointer"><span
+            class="material-symbols-outlined">close</span></button>
+        <div class="text-center mb-6">
+          <h3 class="font-headline text-2xl lg:text-3xl font-bold text-[#1a1c1a] tracking-tight">Book Your Appointment
+          </h3>
+          <p class="font-body text-sm text-[#1a1c1a]/70 mt-1">Choose your preferred method to schedule a session.</p>
+        </div>
+        <div class="mb-6">
+          <a href="https://calendar.app.google/8M58acmCLixe6Hav6" target="_blank"
+            class="bg-[#adbb98] text-white hover:bg-[#9cae86] transition-all duration-300 px-6 py-4 rounded-xl font-label text-xs font-bold tracking-[0.12em] uppercase shadow-md flex justify-center items-center gap-3 w-full text-center">
+            <span class="material-symbols-outlined text-lg">calendar_month</span>Book via Google Calendar
+          </a>
+          <p class="text-[11px] text-[#1a1c1a]/50 text-center mt-2 font-body">Best for international clients (Auto
+            Time-Zone conversion)</p>
+          <div class="mt-4 text-center">
+            <div data-aos="fade-left" data-aos-duration="1000" data-aos-offset="300">
+              <a href="price_list.pdf" target="_blank"
+                class="font-label text-xs tracking-[0.15em] price-list-pulse">PRICE LIST</a>
+            </div>
+          </div>
+        </div>
+        <div class="relative flex py-3 items-center">
+          <div class="flex-grow border-t border-black/10"></div>
+          <span class="flex-shrink mx-4 text-[#1a1c1a]/40 font-label text-xs uppercase tracking-widest">Or Chat
+            Instantly</span>
+          <div class="flex-grow border-t border-black/10"></div>
+        </div>
+        <form id="whatsapp-booking-form-modal" class="flex flex-col gap-4 mt-2">
+          <div class="flex flex-col gap-1">
+            <label for="modalClientName"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Client Name</label>
+            <input type="text" id="modalClientName" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all"
+              placeholder="Your Full Name">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalClientEmail"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Email Address</label>
+            <input type="email" id="modalClientEmail" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all"
+              placeholder="you@example.com">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalClientPhone"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">WhatsApp Number</label>
+            <input type="tel" id="modalClientPhone" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all"
+              placeholder="e.g. +94 77 123 4567">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalServiceNeeded"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Service Needed</label>
+            <select id="modalServiceNeeded" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] outline-none transition-all appearance-none cursor-pointer">
+              <option value="" disabled selected>Select a service</option>
+              <option value="Master Haircut">Master Haircut</option>
+              <option value="Bridal & Grooming">Bridal & Grooming</option>
+              <option value="Nail Artistry">Nail Artistry</option>
+              <option value="Complete Transformation">Complete Transformation</option>
+              <option value="Other">Other Consultation</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalClientMessage"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Message /
+              Details</label>
+            <textarea id="modalClientMessage" rows="2"
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all resize-none"
+              placeholder="Preferred date, time or questions..."></textarea>
+          </div>
+          <button type="submit"
+            class="mt-2 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-500 px-6 py-3.5 rounded-full font-label text-xs font-bold tracking-[0.15em] uppercase shadow-md hover:-translate-y-0.5 flex justify-center items-center gap-2 w-full cursor-pointer">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+            </svg>
+            Send via WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Engines -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroVideoContainer = document.querySelector('.z-0.bg-white');
+      window.addEventListener('scroll', () => {
+        const scrollOffset = window.scrollY;
+        if (scrollOffset <= window.innerHeight) {
+          heroVideoContainer.style.transform = `translateY(${scrollOffset * 0.4}px)`;
+        }
+      });
+
+      // 🌟 FIXED & OPTIMIZED POP-UP LIGHTBOX ENGINE 🌟
+      const popup = document.getElementById('popup-gallery');
+      const popupContent = document.getElementById('popup-gallery-content');
+      const closeGalleryBtn = document.getElementById('close-gallery-btn');
+      const filterButtons = document.querySelectorAll('#popup-gallery .filter-btn');
+      const popupItems = document.querySelectorAll('.popup-item');
+
+      const applyPopupFilter = (filterValue) => {
+        popupItems.forEach(item => {
+          if (item.getAttribute('data-category') === filterValue) {
+            item.classList.remove('hidden-popup-item');
+          } else {
+            item.classList.add('hidden-popup-item');
+          }
+        });
+        document.getElementById('popup-grid-wrapper').scrollTop = 0;
+      };
+
+      // Tracks what category the user is looking at on the Main Page
+      let currentActiveMainCategory = "bridal";
+
+      // Main Page Tabs Interaction logic
+      const mainTabBtns = document.querySelectorAll('.main-tab-btn');
+      mainTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          mainTabBtns.forEach(b => {
+            b.classList.remove('active-tab', 'border-[#adbb98]');
+            b.classList.add('border-black/10');
+          });
+          btn.classList.add('active-tab', 'border-[#adbb98]');
+          btn.classList.remove('border-black/10');
+
+          const category = btn.getAttribute('data-target');
+          currentActiveMainCategory = category; // Update state sync
+
+          for (let i = 1; i <= 4; i++) {
+            const img = document.getElementById(`preview-img-${i}`);
+            if (img) {
+              img.src = `lookbook/${category}/${category}-${i}.webp`;
+            }
+          }
+        });
+      });
+
+      // Arrow overlay click opens popup synced with the active main page category
+      window.openGalleryPopup = () => {
+        filterButtons.forEach(btn => {
+          if (btn.getAttribute('data-filter') === currentActiveMainCategory) {
+            btn.classList.add('active-tab');
+          } else {
+            btn.classList.remove('active-tab');
+          }
+        });
+
+        applyPopupFilter(currentActiveMainCategory);
+
+        popup.classList.remove('invisible', 'opacity-0');
+        popup.classList.add('opacity-100');
+        setTimeout(() => popupContent.classList.add('scale-100'), 10);
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeGalleryPopup = () => {
+        popupContent.classList.remove('scale-100');
+        popupContent.classList.add('scale-95');
+        popup.classList.remove('opacity-100');
+        popup.classList.add('opacity-0');
+        setTimeout(() => {
+          popup.classList.add('invisible');
+          document.body.style.overflow = '';
+        }, 400);
+      };
+
+      // Inner Popup tabs filter logic
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => btn.classList.remove('active-tab'));
+          button.classList.add('active-tab');
+          applyPopupFilter(button.getAttribute('data-filter'));
+        });
+      });
+
+      if (closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGalleryPopup);
+      popup.addEventListener('click', (e) => { if (e.target === popup) closeGalleryPopup(); });
+
+
+      // 1. Theme and Navbar Controller
+      const navbar = document.getElementById('floating-navbar');
+      const logo = document.getElementById('nav-logo');
+      const links = document.querySelectorAll('.nav-link');
+      const menuBtn = document.getElementById('nav-menu-btn');
+      const sections = document.querySelectorAll('[data-nav-theme]');
+      const openNavCta = document.getElementById('open-booking-btn-nav');
+      const openHeroCta = document.getElementById('open-booking-btn-hero');
+
+      // FIXED: Added transparent background logic and blur layer maintenance
+      const applyTheme = (theme, activeIndex = 0) => {
+        if (theme === 'light') {
+          navbar.classList.remove('bg-white', 'bg-white/85');
+          navbar.classList.add('bg-[#adbb98]/75');
+          logo.classList.remove('mix-blend-multiply');
+          logo.classList.add('brightness-0', 'invert');
+
+          links.forEach((link, index) => {
+            link.classList.remove('text-[#1a1c1a]', 'border-[#adbb98]', 'text-[#1a1c1a]/60', 'hover:text-[#1a1c1a]', 'border-b-[2px]', 'pb-0.5', 'border-white', 'text-white/90', 'hover:text-white', 'text-white');
+            if (index === activeIndex) {
+              link.classList.add('text-white', 'border-b-[2px]', 'border-white', 'pb-0.5');
+            } else {
+              link.classList.add('text-white/90', 'hover:text-white');
+            }
+          });
+
+          if (openNavCta) {
+            openNavCta.classList.remove('bg-[#adbb98]', 'text-white', 'hover:bg-[#9cae86]');
+            openNavCta.classList.add('bg-white', 'text-[#adbb98]', 'hover:bg-[#fcfcfc]');
+          }
+
+          if (menuBtn) {
+            menuBtn.classList.remove('text-[#1a1c1a]');
+            menuBtn.classList.add('text-white');
+          }
+        } else {
+          navbar.classList.add('bg-white/70');
+          navbar.classList.remove('bg-[#adbb98]', 'bg-[#adbb98]/75');
+          logo.classList.add('mix-blend-multiply');
+          logo.classList.remove('brightness-0', 'invert');
+
+          links.forEach((link, index) => {
+            link.classList.remove('text-white', 'border-white', 'text-white/90', 'hover:text-white', 'border-b-[2px]', 'pb-0.5', 'border-[#adbb98]', 'text-[#1a1c1a]/60', 'hover:text-[#1a1c1a]', 'text-[#1a1c1a]');
+            if (index === activeIndex) {
+              link.classList.add('text-[#1a1c1a]', 'border-b-[2px]', 'border-[#adbb98]', 'pb-0.5');
+            } else {
+              link.classList.add('text-[#1a1c1a]/60', 'hover:text-[#1a1c1a]');
+            }
+          });
+
+          if (openNavCta) {
+            openNavCta.classList.add('bg-[#adbb98]', 'text-white', 'hover:bg-[#9cae86]');
+            openNavCta.classList.remove('bg-white', 'text-[#adbb98]', 'hover:bg-[#fcfcfc]');
+          }
+
+          if (menuBtn) {
+            menuBtn.classList.add('text-[#1a1c1a]');
+            menuBtn.classList.remove('text-white');
+          }
+        }
+      };
+
+      window.addEventListener('scroll', () => {
+        const navRect = navbar.getBoundingClientRect();
+        const triggerY = navRect.top + (navRect.height / 2);
+        let currentTheme = 'dark';
+        let activeIndex = -1;
+
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= triggerY && rect.bottom >= triggerY) {
+            currentTheme = section.getAttribute('data-nav-theme');
+          }
+        });
+
+        links.forEach((link, index) => {
+          const href = link.getAttribute('href');
+          if (href.startsWith('#') && href !== '#') {
+            const section = document.querySelector(href);
+            if (section) {
+              const rect = section.getBoundingClientRect();
+              if (rect.top <= triggerY + 200 && rect.bottom >= triggerY + 100) {
+                activeIndex = index;
+              }
+            }
+          } else if (href === '#') {
+            if (window.scrollY < window.innerHeight / 2) {
+              activeIndex = index;
+            }
+          }
+        });
+
+        applyTheme(currentTheme, activeIndex !== -1 ? activeIndex : 0);
+      });
+
+      window.dispatchEvent(new Event('scroll'));
+
+      // Video Control
+      const heroVideo = document.getElementById('hero-video');
+      if (heroVideo) {
+        const jumpToMidPoint = () => {
+          if (heroVideo.duration) heroVideo.currentTime = heroVideo.duration / 2;
+          else heroVideo.currentTime = 5;
+        };
+        if (heroVideo.readyState >= 1) jumpToMidPoint();
+        else heroVideo.addEventListener('loadedmetadata', jumpToMidPoint);
+      }
+
+      // Preloader Transition
+      const preloader = document.getElementById('preloader');
+      const counterText = document.getElementById('counter-text');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (preloader && counterText && progressBar) {
+        const loaderSeen = sessionStorage.getItem('homeLoaderSeen');
+        if (loaderSeen === 'true') {
+          preloader.remove();
+          document.body.classList.remove('overflow-hidden');
+        } else {
+          let count = 0;
+          const duration = 1200;
+          const intervalTime = 15;
+          const steps = duration / intervalTime;
+          const increment = 100 / steps;
+
+          const counterInterval = setInterval(() => {
+            count += increment;
+            if (count >= 100) {
+              count = 100;
+              clearInterval(counterInterval);
+              counterText.innerText = '100%';
+              progressBar.style.width = '100%';
+              sessionStorage.setItem('homeLoaderSeen', 'true');
+
+              setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.pointerEvents = 'none';
+                setTimeout(() => {
+                  preloader.remove();
+                  document.body.classList.remove('overflow-hidden');
+                }, 1200);
+              }, 50);
+              return;
+            }
+            counterText.innerText = Math.floor(count) + '%';
+            progressBar.style.width = count + '%';
+          }, intervalTime);
+        }
+      }
+
+      // --- MODAL CONTROLS ---
+      const modal = document.getElementById('booking-modal');
+      const modalContent = document.getElementById('booking-modal-content');
+      const closeBtn = document.getElementById('close-booking-btn');
+      const sliderPanel = document.getElementById('modal-slider-panel');
+      const dropdown = document.getElementById('modalServiceNeeded');
+      const beforeImgEl = document.getElementById('slider-before-img');
+      const afterImgEl = document.getElementById('slider-after-img');
+      const clipSliderInput = document.getElementById('clip-range-slider');
+      const sliderBar = document.getElementById('slider-split-bar');
+
+      const indexImageMapping = [
+        { before: "before-after/before_hair.jpeg", after: "before-after/after_hair.jpeg", service: "Master Haircut" },
+        { before: "before-after/before_bridal.jpeg", after: "before-after/after_bridal.jpeg", service: "Bridal & Grooming" },
+        { before: "before-after/before_nails.jpeg", after: "before-after/after_nails.jpeg", service: "Nail Artistry" },
+        { before: "before-after/before_transformation.jpeg", after: "before-after/after_transformation.jpeg", service: "Complete Transformation" }
+      ];
+
+      if (clipSliderInput && afterImgEl && sliderBar) {
+        clipSliderInput.addEventListener('input', (e) => {
+          const val = e.target.value;
+          afterImgEl.style.clipPath = `polygon(0 0, ${val}% 0, ${val}% 100%, 0 100%)`;
+          sliderBar.style.left = `${val}%`;
+        });
+      }
+
+      const openModalGeneral = () => {
+        if (sliderPanel) sliderPanel.classList.add('hidden');
+        if (modalContent) {
+          modalContent.classList.remove('max-w-[1024px]');
+          modalContent.classList.add('max-w-[600px]');
+        }
+        if (dropdown) dropdown.value = "";
+        modal.classList.remove('invisible', 'opacity-0');
+        modal.classList.add('opacity-100');
+        setTimeout(() => modalContent.classList.add('scale-100'), 10);
+        document.body.style.overflow = 'hidden';
+      };
+
+      document.querySelectorAll('.service-explore-btn').forEach((btn, index) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const config = indexImageMapping[index];
+          if (!config) return;
+
+          if (beforeImgEl && afterImgEl) {
+            beforeImgEl.src = config.before;
+            beforeImgEl.src = config.before;
+            afterImgEl.src = config.after;
+          }
+
+          if (clipSliderInput && sliderBar) {
+            clipSliderInput.value = 50;
+            afterImgEl.style.clipPath = `polygon(0 0, 50% 0, 50% 100%, 0 100%)`;
+            sliderBar.style.left = `50%`;
+          }
+
+          if (sliderPanel) sliderPanel.classList.remove('hidden');
+          if (modalContent) {
+            modalContent.classList.remove('max-w-[600px]');
+            modalContent.classList.add('max-w-[1024px]');
+          }
+          if (dropdown) dropdown.value = config.service;
+
+          modal.classList.remove('invisible', 'opacity-0');
+          modal.classList.add('opacity-100');
+          setTimeout(() => modalContent.classList.add('scale-100'), 10);
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      if (dropdown) {
+        dropdown.addEventListener('change', (e) => {
+          const matched = indexImageMapping.find(item => item.service === e.target.value);
+          if (matched && beforeImgEl && afterImgEl) {
+            beforeImgEl.src = matched.before;
+            afterImgEl.src = matched.after;
+          }
+        });
+      }
+
+      const closeModal = () => {
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        setTimeout(() => {
+          modal.classList.add('invisible');
+          document.body.style.overflow = '';
+        }, 400);
+      };
+
+      if (openNavCta) openNavCta.addEventListener('click', openModalGeneral);
+      if (openHeroCta) openHeroCta.addEventListener('click', openModalGeneral);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+      // WhatsApp Submit
+      const modalForm = document.getElementById('whatsapp-booking-form-modal');
+      if (modalForm) {
+        modalForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const WHATSAPP_NUMBER = '94776201254';
+          const clientName = document.getElementById('modalClientName').value;
+          const clientPhone = document.getElementById('modalClientPhone').value;
+          const clientEmail = document.getElementById('modalClientEmail').value;
+          const parentService = dropdown ? dropdown.value : "";
+          const clientMsg = document.getElementById('modalClientMessage').value;
+
+          let messageText = `Hello! I would like to book an appointment.\n\n` +
+            `*Client Name:* ${clientName}\n` +
+            `*Email Address:* ${clientEmail}\n` +
+            `*Client Phone:* ${clientPhone}\n`;
+
+          if (parentService) messageText += `*Service Requested:* ${parentService}\n`;
+          if (clientMsg) messageText += `*Additional Details:* ${clientMsg}\n`;
+
+          const encodedMessage = encodeURIComponent(messageText);
+          window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`, '_blank');
+          closeModal();
+        });
+      }
+
+      // ⚡ BULLETPROOF CROSS-PAGE & INTERNAL EXIT ANIMATION HANDLER ⚡
+      document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+
+          if (!href || this.getAttribute('target') === '_blank') return;
+
+          if (href.startsWith('#')) return;
+
+          if (href.includes('#')) {
+            e.preventDefault();
+            const parts = href.split('#');
+            const pageTarget = parts[0];
+            const hashTarget = '#' + parts[1];
+
+            localStorage.setItem('scrollTarget', hashTarget);
+
+            document.body.classList.remove('fade-in');
+            document.body.classList.add('fade-out');
+
+            setTimeout(() => {
+              window.location.href = pageTarget;
+            }, 450);
+            return;
+          }
+
+          e.preventDefault();
+          const target = this.href;
+          document.body.classList.remove('fade-in');
+          document.body.classList.add('fade-out');
+
+          setTimeout(() => {
+            window.location.href = target;
+          }, 450);
+        });
+      });
+    });
+
+    // Clean Fade-in Trigger on load
+    window.addEventListener('load', () => {
+      document.body.classList.add('fade-in');
+
+      const scrollTarget = localStorage.getItem('scrollTarget');
+      if (scrollTarget) {
+        localStorage.removeItem('scrollTarget');
+        setTimeout(() => {
+          const targetSection = document.querySelector(scrollTarget);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 1100);
+      }
+    });
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 1000, once: true });</script>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <button id="prev-btn" class="nav-btn" style="left: 20px;">❮</button>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="Full View">
+    <button id="next-btn" class="nav-btn" style="right: 20px;">❯</button>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let currentIndex = 0;
+    const images = Array.from(document.querySelectorAll('.popup-item img'));
+    const getVisibleImages = () => Array.from(document.querySelectorAll('.popup-item:not(.hidden-popup-item) img'));
+
+    function openLightbox(imgElement) {
+      let visibleImages = getVisibleImages();
+      currentIndex = visibleImages.indexOf(imgElement);
+      if (currentIndex === -1) currentIndex = 0;
+      lightboxImg.src = visibleImages[currentIndex].src;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() { lightbox.classList.remove('open'); }
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      let visibleImages = getVisibleImages();
+      if (visibleImages.length === 0) return;
+      currentIndex = (currentIndex + 1) % visibleImages.length;
+      lightboxImg.src = visibleImages[currentIndex].src;
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      let visibleImages = getVisibleImages();
+      if (visibleImages.length === 0) return;
+      currentIndex = (currentIndex - 1 + visibleImages.length) % visibleImages.length;
+      lightboxImg.src = visibleImages[currentIndex].src;
+    });
+
+    // Ensure clicking the Lightbox background closes it
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Update image click listeners in popup
+    images.forEach((img) => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => openLightbox(img));
+    });
+  </script>
+</body>
+
+</html>

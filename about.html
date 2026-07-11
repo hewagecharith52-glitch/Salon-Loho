@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>About Our Experts - Salon Looha</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Work+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet">
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#1a1c1a",
+            "on-primary-fixed-variant": "#3f4b2f",
+            "inverse-on-surface": "#f1f1ed",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#dde6ce",
+            "on-primary": "#ffffff",
+            "primary": "#566345",
+            "secondary": "#59614e",
+            "on-tertiary-fixed-variant": "#3f4b2f",
+            "on-background": "#1a1c1a",
+            "tertiary": "#566345",
+            "background": "#faf9f5",
+            "primary-fixed-dim": "#bdcca8",
+            "tertiary-fixed": "#d9e8c2",
+            "surface": "#faf9f5",
+            "on-tertiary-container": "#3f4b30",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#414938",
+            "primary-container": "#adbb98",
+            "on-primary-container": "#3f4b30",
+            "on-error-container": "#93000a",
+            "surface-container-highest": "#e2e3df",
+            "surface-container-low": "#f4f4f0",
+            "surface-dim": "#dadad6",
+            "inverse-surface": "#2f312e",
+            "surface-tint": "#566345",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#5f6754",
+            "surface-container-high": "#e8e8e4",
+            "surface-container": "#eeeeea",
+            "on-secondary-fixed": "#171e0f",
+            "secondary-fixed-dim": "#c1cab3",
+            "primary-fixed": "#d9e8c2",
+            "inverse-primary": "#bdcca8",
+            "tertiary-container": "#adbb98",
+            "surface-variant": "#e2e3df",
+            "surface-bright": "#faf9f5",
+            "on-surface-variant": "#45483f",
+            "secondary-fixed": "#dde6ce",
+            "outline-variant": "#c6c8bc",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#141f08",
+            "tertiary-fixed-dim": "#bdcca8",
+            "outline": "#76786e",
+            "on-tertiary-fixed": "#141f08",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Playfair Display", "serif"],
+            "display": ["Playfair Display", "serif"],
+            "body": ["Work Sans", "sans-serif"],
+            "label": ["Work Sans", "sans-serif"]
+          }
+        },
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    #booking-modal {
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #booking-modal-content {
+      transition: transform 0.4s ease;
+    }
+
+    @keyframes luxuryFadeIn {
+      0% {
+        opacity: 0;
+        filter: blur(20px);
+        transform: translateY(15px);
+      }
+
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    .luxury-hero {
+      opacity: 0;
+      animation: luxuryFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      animation-delay: 200ms;
+    }
+
+    .luxury-elena {
+      opacity: 0;
+      animation: luxuryFadeIn 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      animation-delay: 400ms;
+    }
+
+    .luxury-sofia {
+      opacity: 0;
+      animation: luxuryFadeIn 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      animation-delay: 600ms;
+    }
+
+    .reveal {
+      opacity: 0;
+      animation: luxuryFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      animation-play-state: paused;
+    }
+
+    .reveal.active {
+      animation-play-state: running;
+    }
+
+    @keyframes kenBurns {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .ken-burns {
+      animation: kenBurns 15s ease-in-out infinite;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 300;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      position: relative;
+      background: white;
+      padding: 10px;
+      border-radius: 1.5rem;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .lightbox img {
+      width: 100%;
+      border-radius: 1rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .bw-hover {
+      transition: filter 0.5s ease;
+      filter: grayscale(0%);
+    }
+
+    .bw-hover:hover {
+      filter: grayscale(100%);
+    }
+
+    .bw-to-color {
+      transition: filter 0.5s ease;
+      filter: grayscale(100%);
+    }
+
+    .bw-to-color:hover {
+      filter: grayscale(0%);
+    }
+
+    @keyframes pulseZoom {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.03);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .animate-zoom {
+      animation: pulseZoom 4s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .price-list-pulse {
+      animation: pulse-green 2s infinite ease-in-out;
+      background-color: #E8F5E9;
+      color: #2E7D32;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      border: 2px solid #2E7D32;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    @keyframes pulse-green {
+      0% {
+        box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(46, 125, 50, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(46, 125, 50, 0);
+      }
+    }
+
+    .price-list-pulse:hover {
+      transform: scale(1.05);
+      background-color: #2E7D32;
+      color: #ffffff;
+    }
+
+    /* FIXED: White glow pulse effect added natively */
+    @keyframes white-pulse-glow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+
+    .hero-white-glow-btn {
+      animation: white-pulse-glow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes map-green-pulse {
+      0% { box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6); }
+      50% { box-shadow: 0 10px 35px 10px rgba(173, 187, 152, 0.95); }
+      100% { box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6); }
+    }
+    .map-pulse-glow {
+      animation: map-green-pulse 3s infinite ease-in-out;
+    }
+
+    /* Page Transition Base */
+    .fade-transition {
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .fade-in {
+      opacity: 1 !important;
+    }
+
+    .fade-out {
+      opacity: 0 !important;
+    }
+
+    .pattern-overlay-light {
+      position: absolute;
+      inset: 0;
+      background-image: url('backgrounds/floral-pattern.jpg');
+      background-repeat: repeat;
+      background-size: 180px 180px;
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .pattern-overlay-dark {
+      position: absolute;
+      inset: 0;
+      background-image: url('backgrounds/floral-pattern.jpg');
+      background-repeat: repeat;
+      background-size: 180px 180px;
+      filter: invert(1);
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .has-pattern {
+      position: relative !important;
+    }
+
+    .has-pattern>*:not(.pattern-overlay-light):not(.pattern-overlay-dark) {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body style="background-color: #ffffff !important;"
+  class="bg-white text-[#1a1c1a] font-body antialiased selection:bg-[#adbb98] selection:text-white overflow-x-hidden fade-transition">
+
+  <div class="fixed inset-0 z-[100] pointer-events-none border-[20px] border-white rounded-[52px]"></div>
+
+  <main class="relative z-10 w-full px-[20px] pt-[20px] pb-[20px]">
+
+    <!-- Navbar Area -->
+    <div id="nav-wrapper"
+      class="sticky top-[20px] left-0 right-0 z-50 flex justify-center w-full px-4 lg:px-12 pt-6 transition-all duration-1000 ease-out">
+      <!-- FIXED: Added responsive backdrop-blur-md -->
+      <nav id="floating-navbar"
+        class="w-full max-w-[1280px] bg-white/70 backdrop-blur-md rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.06)] px-6 lg:px-10 py-4 flex justify-between items-center pointer-events-auto border border-black/5 transition-all duration-500">
+        <a class="font-headline text-xl font-bold tracking-[0.2em] text-[#1a1c1a]" href="code.html">
+          <img id="nav-logo"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
+            alt="Salon Looha Logo" class="h-12 w-auto object-contain mix-blend-multiply transition-all duration-500">
+        </a>
+        <div class="hidden lg:flex gap-10 items-center">
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="code.html">Home</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="code.html#services-section">Services</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="code.html#experts">Experts</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="code.html#reviews">Reviews</a>
+          <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
+            href="code.html#gallery-section">Gallery</a>
+          <a class="nav-link text-[#1a1c1a] border-b-[2px] border-[#adbb98] pb-0.5 font-label text-xs uppercase font-bold tracking-[0.15em] transition-colors duration-500"
+            href="#dimalka">About</a>
+        </div>
+        <div class="flex items-center gap-6">
+          <button id="open-booking-btn-nav"
+            class="bg-[#adbb98] text-white hover:bg-[#9cae86] transition-all duration-500 px-8 py-3 rounded-full font-label text-xs font-bold tracking-[0.15em] uppercase shadow-md hover:-translate-y-0.5 inline-block text-center cursor-pointer">Book
+            Appointment</button>
+          <button id="nav-menu-btn" class="lg:hidden text-[#1a1c1a] transition-colors duration-500">
+            <span class="material-symbols-outlined text-3xl">menu</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- 🤍 HERO/TITLE SECTION -->
+    <div class="relative w-full py-24 lg:py-32 flex flex-col items-center text-center mt-2 bg-white"
+      data-nav-theme="light">
+      <h1
+        class="luxury-hero font-display text-4xl lg:text-6xl font-bold text-[#1a1c1a] leading-tight tracking-tight max-w-4xl mx-auto">
+        The Artistry Behind Salon Looha</h1>
+      <p class="luxury-hero font-body text-lg text-[#1a1c1a]/70 mt-6 max-w-2xl mx-auto">Meet the visionaries who curate
+        our signature aesthetics and elevate the standard of luxury beauty.</p>
+    </div>
+
+    <!-- 👤 SECTION 1: DIMALKA NUWANTHI -->
+    <section id="dimalka" class="luxury-elena bg-white py-24 lg:py-32 border-t border-on-surface/10"
+      data-nav-theme="light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div
+          class="reveal relative h-[500px] lg:h-[650px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/5 group">
+          <img id="founder-profile-img" src="profile-photos/dimalka.jpeg" alt="Dimalka Nuwanthi"
+            class="ken-burns w-full h-full object-cover bw-hover">
+          <div class="absolute inset-0 bg-[#adbb98]/10 pointer-events-none"></div>
+        </div>
+
+        <div class="flex flex-col gap-6 text-left">
+          <div>
+            <h2 class="font-headline text-4xl lg:text-5xl font-bold text-[#1a1c1a] tracking-tight">Dimalka Nuwanthi</h2>
+            <p class="font-label text-xs uppercase tracking-widest text-[#adbb98] font-bold mt-2">Founder & Master
+              Stylist</p>
+          </div>
+          <p class="font-body text-lg text-[#1a1c1a]/80 leading-relaxed">
+            Embarking on my journey in the salon industry in 2015, I have dedicated over a decade to mastering the art
+            of beauty and transformations. My passion and expertise in creating breathtaking bridal transformations
+            earned me the prestigious National Award for Bridal Makeup in 2018. Driven by a commitment to continuous
+            growth and innovation, I expanded my artistry into advanced nail care, which led to winning the renowned
+            Cuccio Nail Special Award in 2025. Today, I combine years of experience with certified expertise to offer
+            paralleled beauty services that make every client feel extraordinary.
+          </p>
+          <div class="mt-2">
+            <h4 class="font-headline text-xl font-bold text-[#1a1c1a] mb-2">Philosophy</h4>
+            <blockquote
+              class="border-l-4 border-[#adbb98] pl-4 italic font-body text-sm text-[#1a1c1a]/70 leading-relaxed">
+              "Every individual possesses a unique, inherent beauty. My philosophy is to enhance that natural elegance
+              using the highest quality products and advanced techniques, creating a timeless look that builds ultimate
+              confidence and celebrates who you truly are."
+            </blockquote>
+          </div>
+          <div class="mt-2">
+            <h4 class="font-headline text-xl font-bold text-[#1a1c1a] mb-2">Certifications</h4>
+            <ul class="list-disc pl-5 font-body text-sm text-[#1a1c1a]/80 flex flex-col gap-1.5">
+              <li>National Certificate in Beautician (NVQ Level 4)</li>
+              <li>Diploma in Salon Management</li>
+              <li>National Certificate in Hair Stylist / Hairdressing (NVQ Level 4)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 👤 SECTION 2: SADEE SUBANDRIYO -->
+    <section id="sadee" class="luxury-sofia bg-[#faf9f5] py-24 lg:py-32" data-nav-theme="light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="flex flex-col gap-6 order-2 lg:order-1">
+          <h2 class="font-headline text-4xl lg:text-5xl font-bold text-[#1a1c1a] tracking-tight">Sadee Subandriyo</h2>
+          <h3 class="font-label text-sm uppercase tracking-widest text-[#adbb98] font-bold">Ladies Hair Specialist</h3>
+          <p class="font-body text-lg text-[#1a1c1a]/80 leading-relaxed">
+            Sadee Subandriyo specializes in creating stunning, modern hair aesthetics tailored for every woman.
+            Combining advanced cutting techniques with the latest coloring and styling trends, she ensures that every
+            client leaves the salon looking radiant, confident, and unforgettable.
+          </p>
+          <div class="mt-4">
+            <h4 class="font-headline text-xl font-bold text-[#1a1c1a] mb-4">Signature Hair Styling Portfolio</h4>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="aspect-square rounded-2xl overflow-hidden cursor-pointer bw-to-color"
+                onclick="openLightbox('bridal-work/work1.jpg')">
+                <img src="bridal-work/work1.jpg" alt="Bridal Style 1"
+                  class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="aspect-square rounded-2xl overflow-hidden cursor-pointer bw-to-color"
+                onclick="openLightbox('bridal-work/work2.jpg')">
+                <img src="bridal-work/work2.jpg" alt="Bridal Style 2"
+                  class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+              </div>
+              <div class="aspect-square rounded-2xl overflow-hidden cursor-pointer bw-to-color"
+                onclick="openLightbox('bridal-work/work3.jpg')">
+                <img src="bridal-work/work3.jpg" alt="Bridal Style 3"
+                  class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="reveal relative h-[500px] lg:h-[650px] rounded-[3rem] overflow-hidden shadow-2xl border border-black/5 order-1 lg:order-2 group">
+          <img src="profile-photos/sadee.jpeg" alt="Sadee Subandriyo - Ladies Hair Specialist"
+            class="ken-burns w-full h-full object-cover bw-hover">
+        </div>
+      </div>
+    </section>
+
+    <!-- Transform CTA Section -->
+    <section
+      class="bg-white py-24 lg:py-32 flex flex-col items-center justify-center text-center border-t border-on-surface/10"
+      data-nav-theme="light">
+      <h2 class="font-headline text-3xl lg:text-4xl font-bold text-[#1a1c1a] mb-6 tracking-tight animate-zoom">Ready to
+        Transform?</h2>
+      <p class="font-body text-[#1a1c1a]/70 mb-10 max-w-lg text-lg">Schedule a personalized consultation with our
+        experts to discuss your unique beauty goals.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <!-- FIXED: Combined Static White Border + White Outer Glow Animation applied natively -->
+        <button id="open-booking-btn-body"
+          class="border-2 border-white hero-white-glow-btn bg-[#adbb98] text-white hover:bg-[#9cae86] transition-all px-12 py-5 rounded-full font-label text-sm font-bold tracking-[0.15em] uppercase shadow-xl hover:shadow-2xl hover:-translate-y-1 cursor-pointer">Book
+          a Session With Our Experts</button>
+        <a href="price_list.pdf" target="_blank"
+          class="font-label text-sm tracking-[0.15em] shadow-xl hover:shadow-2xl flex items-center justify-center price-list-pulse">PRICE
+          LIST</a>
+      </div>
+    </section>
+
+    <!-- Sanctuary Visit Details Container -->
+    <section id="about-section" class="bg-white py-24 lg:py-32 border-t border-on-surface/10" data-nav-theme="light">
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="flex flex-col gap-8">
+          <h2 class="font-headline text-3xl lg:text-4xl font-bold text-[#1a1c1a] tracking-tight">Visit Our Sanctuary
+          </h2>
+          <div class="flex flex-col gap-6">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#adbb98] mt-1">location_on</span>
+              <div>
+                <p class="font-body text-lg text-[#1a1c1a]">Ave Maria Rd, Negombo 11410</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-[#adbb98]">schedule</span>
+              <p class="font-body text-lg text-[#1a1c1a]">Monday – Sunday, 10am – 8pm</p>
+            </div>
+          </div>
+          <div class="pt-4">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Salon+Looha+Negombo&destination_place_id=ChIJ-Y-95bd0e8830467"
+              target="_blank"
+              class="inline-block bg-white text-[#adbb98] border-2 border-[#adbb98] hover:bg-[#adbb98] hover:text-white transition-all px-8 py-4 rounded-full font-label text-base font-semibold tracking-wide uppercase text-center cursor-pointer">GET
+              DIRECTIONS</a>
+          </div>
+        </div>
+        <div class="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-on-surface/5 map-pulse-glow">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.298188188157!2d79.84045737499645!3d7.212451615655447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2ef01549acaad%3A0x60995bd0e8830467!2sSalon%20looha!5e0!3m2!1sen!2slk!4v1720630650942!5m2!1sen!2slk"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer class="bg-[#adbb98] text-white w-full pt-24 pb-8 border-t border-white/20" data-nav-theme="dark">
+      <div
+        class="max-w-[1200px] mx-auto px-6 lg:px-24 w-full flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+        <div class="max-w-sm">
+          <a class="block mb-6" href="#"><img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
+              alt="Salon Looha Logo" class="h-24 w-auto object-contain"></a>
+          <p class="font-body text-white/80 text-sm leading-relaxed mb-6">A sanctuary of style and rejuvenation.
+            Redefining modern luxury through organic practices and unparalleled expertise.</p>
+        </div>
+      </div>
+      <div
+        class="max-w-[1200px] mx-auto px-6 lg:px-24 w-full pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-label text-xs text-white/60 uppercase tracking-wider">© 2024 SALON SALON LOOHA. DESIGNED FOR
+          DISCERNING CLIENTS.</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Popup Modal Engine Container -->
+  <div id="booking-modal"
+    class="fixed inset-0 z-[150] bg-black/60 opacity-0 invisible flex items-center justify-center p-4 backdrop-blur-md">
+    <div id="booking-modal-content"
+      class="bg-[#faf9f5] w-full max-w-[600px] rounded-[2.5rem] shadow-2xl border border-black/5 overflow-hidden scale-95 relative max-h-[90vh] flex flex-col">
+      <button id="close-booking-btn"
+        class="absolute top-6 right-6 w-10 h-10 rounded-full bg-[#1a1c1a]/5 hover:bg-[#1a1c1a]/10 transition-colors flex items-center justify-center text-[#1a1c1a] z-10 cursor-pointer"><span
+          class="material-symbols-outlined">close</span></button>
+      <div class="p-8 lg:p-10 overflow-y-auto">
+        <div class="text-center mb-6">
+          <h3 class="font-headline text-2xl lg:text-3xl font-bold text-[#1a1c1a] tracking-tight">Book Your Appointment
+          </h3>
+          <p class="font-body text-sm text-[#1a1c1a]/70 mt-1">Choose your preferred method to schedule a session.</p>
+        </div>
+        <div class="mb-6">
+          <a href="https://calendar.app.google/8M58acmCLixe6Hav6" target="_blank"
+            class="bg-[#adbb98] text-white hover:bg-[#9cae86] transition-all duration-300 px-6 py-4 rounded-xl font-label text-xs font-bold tracking-[0.12em] uppercase shadow-md flex justify-center items-center gap-3 w-full text-center">
+            <span class="material-symbols-outlined text-lg">calendar_month</span>Book via Google Calendar
+          </a>
+          <p class="text-[11px] text-[#1a1c1a]/50 text-center mt-2 font-body">Best for international clients (Auto
+            Time-Zone conversion)</p>
+          <div class="mt-4 text-center">
+            <a href="price_list.pdf" target="_blank" class="font-label text-xs tracking-[0.15em] price-list-pulse">PRICE
+              LIST</a>
+          </div>
+        </div>
+        <div class="relative flex py-3 items-center">
+          <div class="flex-grow border-t border-black/10"></div>
+          <span class="flex-shrink mx-4 text-[#1a1c1a]/40 font-label text-xs uppercase tracking-widest">Or Chat
+            Instantly</span>
+          <div class="flex-grow border-t border-black/10"></div>
+        </div>
+        <form id="whatsapp-booking-form-modal" class="flex flex-col gap-4 mt-2">
+          <div class="flex flex-col gap-1">
+            <label for="modalClientName"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Client Name</label>
+            <input type="text" id="modalClientName" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all"
+              placeholder="Your Full Name">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalClientEmail"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Email Address</label>
+            <input type="email" id="modalClientEmail" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all"
+              placeholder="you@example.com">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalClientPhone"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">WhatsApp Number</label>
+            <input type="tel" id="modalClientPhone" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all"
+              placeholder="e.g. +94 77 123 4567">
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalServiceNeeded"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Service Needed</label>
+            <select id="modalServiceNeeded" required
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] outline-none transition-all appearance-none cursor-pointer">
+              <option value="" disabled selected>Select a service</option>
+              <option value="Master Haircut">Master Haircut</option>
+              <option value="Bridal & Grooming">Bridal & Grooming</option>
+              <option value="Nail Artistry">Nail Artistry</option>
+              <option value="Complete Transformation">Complete Transformation</option>
+              <option value="Other">Other Consultation</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="modalClientMessage"
+              class="font-label text-[11px] uppercase tracking-widest font-bold text-[#1a1c1a]">Message /
+              Details</label>
+            <textarea id="modalClientMessage" rows="2"
+              class="w-full bg-[#f4f4f0] border-transparent focus:border-[#adbb98] focus:ring-0 rounded-xl px-4 py-2.5 font-body text-sm text-[#1a1c1a] placeholder-[#1a1c1a]/40 outline-none transition-all resize-none"
+              placeholder="Preferred date, time or questions..."></textarea>
+          </div>
+          <button type="submit"
+            class="mt-2 bg-[#25D366] text-white hover:bg-[#20b858] transition-colors duration-500 px-6 py-3.5 rounded-full font-label text-xs font-bold tracking-[0.15em] uppercase shadow-md hover:-translate-y-0.5 flex justify-center items-center gap-2 w-full cursor-pointer">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+            </svg>
+            Send via WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Engines -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.getElementById('floating-navbar');
+      const logo = document.getElementById('nav-logo');
+      const links = document.querySelectorAll('.nav-link');
+      const menuBtn = document.getElementById('nav-menu-btn');
+      const openNavCta = document.getElementById('open-booking-btn-nav');
+      const openBodyCta = document.getElementById('open-booking-btn-body');
+      const sections = document.querySelectorAll('[data-nav-theme]');
+
+      // Clean Page Load Fade-In Trigger
+      setTimeout(() => {
+        document.body.classList.add('fade-in');
+      }, 50);
+
+      // FIXED: Updated transparent background limits inside applyTheme natively
+      const applyTheme = (theme, activeIndex = 5) => {
+        if (theme === 'light') {
+          navbar.classList.remove('bg-white', 'bg-white/70');
+          navbar.classList.add('bg-[#adbb98]/75');
+          logo.classList.remove('mix-blend-multiply');
+          logo.classList.add('brightness-0', 'invert');
+
+          links.forEach((link, index) => {
+            link.classList.remove('text-[#1a1c1a]', 'border-[#adbb98]', 'text-[#1a1c1a]/60', 'hover:text-[#1a1c1a]', 'border-b-[2px]', 'pb-0.5', 'border-white', 'text-white/90', 'hover:text-white', 'text-white');
+            if (index === activeIndex) {
+              link.classList.add('text-white', 'border-b-[2px]', 'border-white', 'pb-0.5');
+            } else {
+              link.classList.add('text-white/90', 'hover:text-white');
+            }
+          });
+
+          if (openNavCta) {
+            openNavCta.classList.remove('bg-[#adbb98]', 'text-white', 'hover:bg-[#9cae86]');
+            openNavCta.classList.add('bg-white', 'text-[#adbb98]', 'hover:bg-[#fcfcfc]');
+          }
+
+          if (menuBtn) {
+            menuBtn.classList.remove('text-[#1a1c1a]');
+            menuBtn.classList.add('text-white');
+          }
+        } else {
+          navbar.classList.add('bg-white/70');
+          navbar.classList.remove('bg-[#adbb98]', 'bg-[#adbb98]/75');
+          logo.classList.add('mix-blend-multiply');
+          logo.classList.remove('brightness-0', 'invert');
+
+          links.forEach((link, index) => {
+            link.classList.remove('text-white', 'border-white', 'text-white/90', 'hover:text-white', 'border-b-[2px]', 'pb-0.5', 'border-[#adbb98]', 'text-[#1a1c1a]/60', 'hover:text-[#1a1c1a]', 'text-[#1a1c1a]');
+            if (index === activeIndex) {
+              link.classList.add('text-[#1a1c1a]', 'border-b-[2px]', 'border-[#adbb98]', 'pb-0.5');
+            } else {
+              link.classList.add('text-[#1a1c1a]/60', 'hover:text-[#1a1c1a]');
+            }
+          });
+
+          if (openNavCta) {
+            openNavCta.classList.add('bg-[#adbb98]', 'text-white', 'hover:bg-[#9cae86]');
+            openNavCta.classList.remove('bg-white', 'text-[#adbb98]', 'hover:bg-[#fcfcfc]');
+          }
+
+          if (menuBtn) {
+            menuBtn.classList.add('text-[#1a1c1a]');
+            menuBtn.classList.remove('text-white');
+          }
+        }
+      };
+
+      window.addEventListener('scroll', () => {
+        const navRect = navbar.getBoundingClientRect();
+        const triggerY = navRect.top + (navRect.height / 2);
+        let currentTheme = 'dark';
+        let activeIndex = 5;
+
+        sections.forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= triggerY && rect.bottom >= triggerY) {
+            currentTheme = section.getAttribute('data-nav-theme');
+          }
+        });
+
+        applyTheme(currentTheme, activeIndex);
+      });
+
+      window.dispatchEvent(new Event('scroll'));
+
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      const modal = document.getElementById('booking-modal');
+      const modalContent = document.getElementById('booking-modal-content');
+      const closeBtn = document.getElementById('close-booking-btn');
+
+      const openModal = () => {
+        modal.classList.remove('invisible', 'opacity-0');
+        modal.classList.add('opacity-100');
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        setTimeout(() => {
+          modal.classList.add('invisible');
+          document.body.style.overflow = '';
+        }, 400);
+      };
+
+      if (openNavCta) openNavCta.addEventListener('click', openModal);
+      if (openBodyCta) openBodyCta.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+      const modalForm = document.getElementById('whatsapp-booking-form-modal');
+      if (modalForm) {
+        modalForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const WHATSAPP_NUMBER = '94776201254';
+          const clientName = document.getElementById('modalClientName').value;
+          const clientEmail = document.getElementById('modalClientEmail').value;
+          const clientPhone = document.getElementById('modalClientPhone').value;
+          const serviceSelected = document.getElementById('modalServiceNeeded').value;
+          const clientMsg = document.getElementById('modalClientMessage').value;
+
+          const messageText = `Hello! I would like to book an appointment.\n\n` +
+            `*Client Name:* ${clientName}\n` +
+            `*Email Address:* ${clientEmail}\n` +
+            `*Client Phone:* ${clientPhone}\n` +
+            `*Service Requested:* ${serviceSelected}\n` +
+            `*Project Details:* ${clientMsg}`;
+
+          const encodedMessage = encodeURIComponent(messageText);
+          window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`, '_blank');
+          closeModal();
+        });
+      }
+
+      // ⚡ INTUITIVE EXIT ANIMATION HANDLER FOR ALL LINKS WITH CROSS-PAGE ANCHOR FIX
+      document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+
+          if (!href || this.getAttribute('target') === '_blank') return;
+
+          if (href.startsWith('#')) return;
+
+          if (href.includes('#')) {
+            e.preventDefault();
+            const parts = href.split('#');
+            const pageTarget = parts[0];
+            const hashTarget = '#' + parts[1];
+
+            localStorage.setItem('scrollTarget', hashTarget);
+
+            document.body.classList.remove('fade-in');
+            document.body.classList.add('fade-out');
+
+            setTimeout(() => {
+              window.location.href = pageTarget;
+            }, 450);
+            return;
+          }
+
+          e.preventDefault();
+          const target = this.href;
+          document.body.classList.remove('fade-in');
+          document.body.classList.add('fade-out');
+
+          setTimeout(() => {
+            window.location.href = target;
+          }, 450);
+        });
+      });
+    });
+
+    // ⚡ CLEANLY SEPARATED INDEPENDENT INCOMING DELAYED SCROLL HANDLER 
+    window.addEventListener('load', () => {
+      const scrollTarget = localStorage.getItem('scrollTarget');
+      if (scrollTarget) {
+        localStorage.removeItem('scrollTarget');
+        setTimeout(() => {
+          const targetSection = document.querySelector(scrollTarget);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 900);
+      }
+    });
+  </script>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-btn" onclick="closeLightbox()">&times;</span>
+      <img id="lightbox-img" src="" alt="Full size preview">
+    </div>
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+  </script>
+</body>
+
+</html>
