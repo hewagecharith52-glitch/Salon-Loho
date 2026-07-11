@@ -293,10 +293,19 @@
     }
 
     @keyframes map-green-pulse {
-      0% { box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6); }
-      50% { box-shadow: 0 10px 35px 10px rgba(173, 187, 152, 0.95); }
-      100% { box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6); }
+      0% {
+        box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6);
+      }
+
+      50% {
+        box-shadow: 0 10px 35px 10px rgba(173, 187, 152, 0.95);
+      }
+
+      100% {
+        box-shadow: 0 5px 15px 0 rgba(173, 187, 152, 0.6);
+      }
     }
+
     .map-pulse-glow {
       animation: map-green-pulse 3s infinite ease-in-out;
     }
@@ -532,7 +541,8 @@
               DIRECTIONS</a>
           </div>
         </div>
-        <div class="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-on-surface/5 map-pulse-glow">
+        <div
+          class="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-on-surface/5 map-pulse-glow">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.298188188157!2d79.84045737499645!3d7.212451615655447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2ef01549acaad%3A0x60995bd0e8830467!2sSalon%20looha!5e0!3m2!1sen!2slk!4v1720630650942!5m2!1sen!2slk"
             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
