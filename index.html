@@ -292,16 +292,20 @@
 
     /* Lightbox Styles */
     .lightbox {
-      display: none;
       position: fixed;
       inset: 0;
       z-index: 9999;
       background: rgba(0, 0, 0, 0.98);
       align-items: center;
       justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     }
 
     .lightbox.open {
+      opacity: 1;
+      visibility: visible;
       display: flex;
     }
 
@@ -370,17 +374,16 @@
 
     <div id="nav-wrapper"
       class="sticky top-[20px] left-0 right-0 z-50 flex justify-center w-full px-4 lg:px-12 pt-6 pointer-events-none transition-all duration-1000 ease-out">
-      <!-- FIXED: Backdrop blur and responsive classes applied natively -->
       <nav id="floating-navbar"
         class="w-full max-w-[1280px] bg-white/70 backdrop-blur-md rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.06)] px-6 lg:px-10 py-4 flex justify-between items-center pointer-events-auto border border-black/5 transition-all duration-500">
-        <a class="font-headline text-xl font-bold tracking-[0.2em] text-[#1a1c1a]" href="#">
+        <a class="font-headline text-xl font-bold tracking-[0.2em] text-[#1a1c1a]" href="index.html">
           <img id="nav-logo"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
             alt="Salon Looha Logo" class="h-12 w-auto object-contain mix-blend-multiply transition-all duration-500">
         </a>
         <div class="hidden lg:flex gap-10 items-center">
           <a class="nav-link text-[#1a1c1a] border-b-[2px] border-[#adbb98] pb-0.5 font-label text-xs uppercase font-bold tracking-[0.15em] transition-all duration-500"
-            href="#">Home</a>
+            href="index.html">Home</a>
           <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-all duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
             href="#services-section">Services</a>
           <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-all duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
@@ -409,7 +412,8 @@
       <div id="hero-content"
         class="flex-1 flex flex-col justify-center w-full max-w-[1280px] mx-auto px-8 lg:px-16 relative z-10 pb-20 mt-16 lg:mt-0 transition-all duration-[1.5s] ease-out">
         <div class="max-w-4xl mx-auto flex flex-col gap-8 items-center text-center">
-          <div class="text-premium-backdrop px-8 py-10 md:px-12 md:py-12 rounded-[28px] shadow-[0_10px_40px_rgba(0,0,0,0.04)] max-w-3xl mx-auto flex flex-col gap-6">
+          <div
+            class="text-premium-backdrop px-8 py-10 md:px-12 md:py-12 rounded-[28px] shadow-[0_10px_40px_rgba(0,0,0,0.04)] max-w-3xl mx-auto flex flex-col gap-6">
             <h1 id="kinetic-title"
               class="font-display text-5xl lg:text-7xl font-bold text-[#1a1c1a] leading-[1.1] tracking-tight">
               Your Dream Wedding,<br>Anywhere.
@@ -646,7 +650,7 @@
       <div
         class="max-w-[1200px] mx-auto px-6 lg:px-24 w-full flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
         <div class="max-w-sm">
-          <a class="block mb-6" href="#"><img
+          <a class="block mb-6" href="index.html"><img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
               alt="Salon Looha Logo" class="h-24 w-auto object-contain"></a>
           <p class="font-body text-white/80 text-sm leading-relaxed mb-6">A sanctuary of style and rejuvenation.
@@ -663,11 +667,11 @@
         <div class="grid grid-cols-2 gap-12 w-full md:w-auto">
           <div class="flex flex-col gap-4">
             <h5 class="font-label text-xs uppercase tracking-widest text-white/60 mb-2">Explore</h5>
-            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Services</a>
-            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Our Team</a>
-            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Gallery</a>
-            <a class="font-body text-white hover:text-white/70 transition-colors" href="#">Contact</a>
-            <div data-aos="fade-right" data-aos-duration="1000" data-aos-offset="300">
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#services-section">Services</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#experts">Our Team</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#gallery-section">Gallery</a>
+            <a class="font-body text-white hover:text-white/70 transition-colors" href="#about-section">Contact</a>
+            <div>
               <a class="font-body price-list-pulse mt-2 text-sm uppercase tracking-wider text-white"
                 href="price_list.pdf" target="_blank">PRICE LIST</a>
             </div>
@@ -690,26 +694,23 @@
 
   </main>
 
-  <!-- 🌟 HIGH-END FULLSCREEN POP-UP LOOKBOOK GALLERY LIGHTBOX 🌟 -->
+  <!-- Lookbook Gallery Lightbox -->
   <div id="popup-gallery"
     class="fixed inset-0 z-[160] bg-black/70 opacity-0 invisible flex items-center justify-center p-4 md:p-10 backdrop-blur-md transition-all duration-400 overflow-hidden">
     <div id="popup-gallery-content"
       class="bg-[#faf9f5] w-full max-w-[1280px] h-[90vh] rounded-[2.5rem] shadow-2xl overflow-hidden scale-95 relative flex flex-col p-6 md:p-10 transition-all duration-400">
 
-      <!-- Close Button -->
       <button id="close-gallery-btn"
         class="absolute top-6 right-6 w-12 h-12 rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-black z-50 cursor-pointer">
         <span class="material-symbols-outlined">close</span>
       </button>
 
-      <!-- Header Inside Pop-up -->
       <div class="text-center mb-4 flex-shrink-0">
         <h3 class="font-headline text-2xl md:text-3xl font-bold text-[#1a1c1a]">The Looha Lookbook</h3>
         <p class="font-body text-xs text-[#1a1c1a]/50 mt-0.5 uppercase tracking-wider">Select a collection to filter
           curated transformations</p>
       </div>
 
-      <!-- Filter Buttons Inside Pop-up Gallery Layer -->
       <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 flex-shrink-0">
         <button
           class="filter-btn active-tab px-6 py-2 rounded-full border-2 border-black/10 text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
@@ -725,9 +726,8 @@
           data-filter="hair">Hair Aesthetics</button>
       </div>
 
-      <!-- Pop-up Grid Container (Scrollable) -->
       <div class="flex-1 overflow-y-auto pr-2 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6" id="popup-grid-wrapper">
-        <!-- Bridal Collection (1-20) -->
+        <!-- Bridal Collection -->
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
             class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-1.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
@@ -748,28 +748,8 @@
             class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-9.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
             class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-10.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-11.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-12.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-13.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-14.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-15.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-16.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-17.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-18.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-19.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="bridal"><img
-            class="w-full h-full object-cover" src="lookbook/bridal/photos/bridal-20.webp"></div>
 
-        <!-- Party Collection (1-20) -->
+        <!-- Party Collection -->
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
             class="w-full h-full object-cover" src="lookbook/party/photos/party-1.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
@@ -780,122 +760,23 @@
             class="w-full h-full object-cover" src="lookbook/party/photos/party-4.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
             class="w-full h-full object-cover" src="lookbook/party/photos/party-5.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-6.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-7.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-8.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-9.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-10.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-11.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-12.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-13.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-14.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-15.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-16.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-17.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-18.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-19.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="party"><img
-            class="w-full h-full object-cover" src="lookbook/party/photos/party-20.webp"></div>
 
-        <!-- Nails Collection (1-20) -->
+        <!-- Nails Collection -->
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
             class="w-full h-full object-cover" src="lookbook/nails/photos/nails-1.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
             class="w-full h-full object-cover" src="lookbook/nails/photos/nails-2.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
             class="w-full h-full object-cover" src="lookbook/nails/photos/nails-3.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-4.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-5.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-6.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-7.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-8.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-9.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-10.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-11.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-12.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-13.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-14.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-15.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-16.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-17.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-18.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-19.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="nails"><img
-            class="w-full h-full object-cover" src="lookbook/nails/photos/nails-20.webp"></div>
 
-        <!-- Hair Collection (1-20) -->
+        <!-- Hair Collection -->
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
             class="w-full h-full object-cover" src="lookbook/hair/photos/hair-1.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
             class="w-full h-full object-cover" src="lookbook/hair/photos/hair-2.webp"></div>
         <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
             class="w-full h-full object-cover" src="lookbook/hair/photos/hair-3.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-4.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-5.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-6.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-7.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-8.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-9.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-10.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-11.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-12.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-13.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-14.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-15.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-16.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-17.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-18.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-19.webp"></div>
-        <div class="popup-item aspect-square rounded-xl overflow-hidden" data-category="hair"><img
-            class="w-full h-full object-cover" src="lookbook/hair/photos/hair-20.webp"></div>
       </div>
-
     </div>
   </div>
 
@@ -936,10 +817,8 @@
           <p class="text-[11px] text-[#1a1c1a]/50 text-center mt-2 font-body">Best for international clients (Auto
             Time-Zone conversion)</p>
           <div class="mt-4 text-center">
-            <div data-aos="fade-left" data-aos-duration="1000" data-aos-offset="300">
-              <a href="price_list.pdf" target="_blank"
-                class="font-label text-xs tracking-[0.15em] price-list-pulse">PRICE LIST</a>
-            </div>
+            <a href="price_list.pdf" target="_blank" class="font-label text-xs tracking-[0.15em] price-list-pulse">PRICE
+              LIST</a>
           </div>
         </div>
         <div class="relative flex py-3 items-center">
@@ -1015,7 +894,6 @@
         }
       });
 
-      // 🌟 FIXED & OPTIMIZED POP-UP LIGHTBOX ENGINE 🌟
       const popup = document.getElementById('popup-gallery');
       const popupContent = document.getElementById('popup-gallery-content');
       const closeGalleryBtn = document.getElementById('close-gallery-btn');
@@ -1033,10 +911,8 @@
         document.getElementById('popup-grid-wrapper').scrollTop = 0;
       };
 
-      // Tracks what category the user is looking at on the Main Page
       let currentActiveMainCategory = "bridal";
 
-      // Main Page Tabs Interaction logic
       const mainTabBtns = document.querySelectorAll('.main-tab-btn');
       mainTabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1048,7 +924,7 @@
           btn.classList.remove('border-black/10');
 
           const category = btn.getAttribute('data-target');
-          currentActiveMainCategory = category; // Update state sync
+          currentActiveMainCategory = category;
 
           for (let i = 1; i <= 4; i++) {
             const img = document.getElementById(`preview-img-${i}`);
@@ -1059,7 +935,6 @@
         });
       });
 
-      // Arrow overlay click opens popup synced with the active main page category
       window.openGalleryPopup = () => {
         filterButtons.forEach(btn => {
           if (btn.getAttribute('data-filter') === currentActiveMainCategory) {
@@ -1088,7 +963,6 @@
         }, 400);
       };
 
-      // Inner Popup tabs filter logic
       filterButtons.forEach(button => {
         button.addEventListener('click', () => {
           filterButtons.forEach(btn => btn.classList.remove('active-tab'));
@@ -1101,7 +975,6 @@
       popup.addEventListener('click', (e) => { if (e.target === popup) closeGalleryPopup(); });
 
 
-      // 1. Theme and Navbar Controller
       const navbar = document.getElementById('floating-navbar');
       const logo = document.getElementById('nav-logo');
       const links = document.querySelectorAll('.nav-link');
@@ -1110,7 +983,6 @@
       const openNavCta = document.getElementById('open-booking-btn-nav');
       const openHeroCta = document.getElementById('open-booking-btn-hero');
 
-      // FIXED: Added transparent background logic and blur layer maintenance
       const applyTheme = (theme, activeIndex = 0) => {
         if (theme === 'light') {
           navbar.classList.remove('bg-white', 'bg-white/85');
@@ -1186,7 +1058,7 @@
                 activeIndex = index;
               }
             }
-          } else if (href === '#') {
+          } else if (href === 'index.html' || href === '#') {
             if (window.scrollY < window.innerHeight / 2) {
               activeIndex = index;
             }
@@ -1198,7 +1070,6 @@
 
       window.dispatchEvent(new Event('scroll'));
 
-      // Video Control
       const heroVideo = document.getElementById('hero-video');
       if (heroVideo) {
         const jumpToMidPoint = () => {
@@ -1209,7 +1080,6 @@
         else heroVideo.addEventListener('loadedmetadata', jumpToMidPoint);
       }
 
-      // Preloader Transition
       const preloader = document.getElementById('preloader');
       const counterText = document.getElementById('counter-text');
       const progressBar = document.getElementById('progress-bar');
@@ -1251,7 +1121,6 @@
         }
       }
 
-      // --- MODAL CONTROLS ---
       const modal = document.getElementById('booking-modal');
       const modalContent = document.getElementById('booking-modal-content');
       const closeBtn = document.getElementById('close-booking-btn');
@@ -1297,7 +1166,6 @@
           if (!config) return;
 
           if (beforeImgEl && afterImgEl) {
-            beforeImgEl.src = config.before;
             beforeImgEl.src = config.before;
             afterImgEl.src = config.after;
           }
@@ -1348,7 +1216,6 @@
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-      // WhatsApp Submit
       const modalForm = document.getElementById('whatsapp-booking-form-modal');
       if (modalForm) {
         modalForm.addEventListener('submit', (e) => {
@@ -1374,7 +1241,7 @@
         });
       }
 
-      // ⚡ BULLETPROOF CROSS-PAGE & INTERNAL EXIT ANIMATION HANDLER ⚡
+      // ⚡ INTUITIVE EXIT ANIMATION HANDLER WITH DIRECTORY CROSS-FIXED ROUTING
       document.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function (e) {
           const href = this.getAttribute('href');
@@ -1386,8 +1253,12 @@
           if (href.includes('#')) {
             e.preventDefault();
             const parts = href.split('#');
-            const pageTarget = parts[0];
+            let pageTarget = parts[0];
             const hashTarget = '#' + parts[1];
+
+            if (pageTarget === '' || pageTarget === './') {
+              pageTarget = 'index.html';
+            }
 
             localStorage.setItem('scrollTarget', hashTarget);
 
@@ -1401,7 +1272,7 @@
           }
 
           e.preventDefault();
-          const target = this.href;
+          let target = this.href;
           document.body.classList.remove('fade-in');
           document.body.classList.add('fade-out');
 
@@ -1412,7 +1283,6 @@
       });
     });
 
-    // Clean Fade-in Trigger on load
     window.addEventListener('load', () => {
       document.body.classList.add('fade-in');
 
@@ -1431,7 +1301,7 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init({ duration: 1000, once: true });</script>
 
-  <!-- Lightbox Modal -->
+  <!-- Lightbox Modal Box Area -->
   <div id="lightbox" class="lightbox">
     <span class="close-btn" onclick="closeLightbox()">&times;</span>
     <button id="prev-btn" class="nav-btn" style="left: 20px;">❮</button>
@@ -1470,14 +1340,12 @@
       lightboxImg.src = visibleImages[currentIndex].src;
     });
 
-    // Ensure clicking the Lightbox background closes it
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) {
         closeLightbox();
       }
     });
 
-    // Update image click listeners in popup
     images.forEach((img) => {
       img.style.cursor = 'pointer';
       img.addEventListener('click', () => openLightbox(img));

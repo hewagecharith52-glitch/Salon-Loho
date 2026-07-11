@@ -273,7 +273,6 @@
       color: #ffffff;
     }
 
-    /* FIXED: White glow pulse effect added natively */
     @keyframes white-pulse-glow {
       0% {
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
@@ -310,7 +309,6 @@
       animation: map-green-pulse 3s infinite ease-in-out;
     }
 
-    /* Page Transition Base */
     .fade-transition {
       opacity: 0;
       transition: opacity 0.5s ease-out;
@@ -368,25 +366,24 @@
     <!-- Navbar Area -->
     <div id="nav-wrapper"
       class="sticky top-[20px] left-0 right-0 z-50 flex justify-center w-full px-4 lg:px-12 pt-6 transition-all duration-1000 ease-out">
-      <!-- FIXED: Added responsive backdrop-blur-md -->
       <nav id="floating-navbar"
         class="w-full max-w-[1280px] bg-white/70 backdrop-blur-md rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.06)] px-6 lg:px-10 py-4 flex justify-between items-center pointer-events-auto border border-black/5 transition-all duration-500">
-        <a class="font-headline text-xl font-bold tracking-[0.2em] text-[#1a1c1a]" href="code.html">
+        <a class="font-headline text-xl font-bold tracking-[0.2em] text-[#1a1c1a]" href="index.html">
           <img id="nav-logo"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
             alt="Salon Looha Logo" class="h-12 w-auto object-contain mix-blend-multiply transition-all duration-500">
         </a>
         <div class="hidden lg:flex gap-10 items-center">
           <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
-            href="code.html">Home</a>
+            href="index.html">Home</a>
           <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
-            href="code.html#services-section">Services</a>
+            href="index.html#services-section">Services</a>
           <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
-            href="code.html#experts">Experts</a>
+            href="index.html#experts">Experts</a>
           <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
-            href="code.html#reviews">Reviews</a>
+            href="index.html#reviews">Reviews</a>
           <a class="nav-link text-[#1a1c1a]/60 hover:text-[#1a1c1a] transition-colors duration-500 font-label text-xs uppercase font-bold tracking-[0.15em]"
-            href="code.html#gallery-section">Gallery</a>
+            href="index.html#gallery-section">Gallery</a>
           <a class="nav-link text-[#1a1c1a] border-b-[2px] border-[#adbb98] pb-0.5 font-label text-xs uppercase font-bold tracking-[0.15em] transition-colors duration-500"
             href="#dimalka">About</a>
         </div>
@@ -401,7 +398,7 @@
       </nav>
     </div>
 
-    <!-- 🤍 HERO/TITLE SECTION -->
+    <!-- HERO/TITLE SECTION -->
     <div class="relative w-full py-24 lg:py-32 flex flex-col items-center text-center mt-2 bg-white"
       data-nav-theme="light">
       <h1
@@ -411,7 +408,7 @@
         our signature aesthetics and elevate the standard of luxury beauty.</p>
     </div>
 
-    <!-- 👤 SECTION 1: DIMALKA NUWANTHI -->
+    <!-- SECTION 1: DIMALKA NUWANTHI -->
     <section id="dimalka" class="luxury-elena bg-white py-24 lg:py-32 border-t border-on-surface/10"
       data-nav-theme="light">
       <div class="max-w-[1280px] mx-auto px-6 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -457,7 +454,7 @@
       </div>
     </section>
 
-    <!-- 👤 SECTION 2: SADEE SUBANDRIYO -->
+    <!-- SECTION 2: SADEE SUBANDRIYO -->
     <section id="sadee" class="luxury-sofia bg-[#faf9f5] py-24 lg:py-32" data-nav-theme="light">
       <div class="max-w-[1280px] mx-auto px-6 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="flex flex-col gap-6 order-2 lg:order-1">
@@ -506,7 +503,6 @@
       <p class="font-body text-[#1a1c1a]/70 mb-10 max-w-lg text-lg">Schedule a personalized consultation with our
         experts to discuss your unique beauty goals.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <!-- FIXED: Combined Static White Border + White Outer Glow Animation applied natively -->
         <button id="open-booking-btn-body"
           class="border-2 border-white hero-white-glow-btn bg-[#adbb98] text-white hover:bg-[#9cae86] transition-all px-12 py-5 rounded-full font-label text-sm font-bold tracking-[0.15em] uppercase shadow-xl hover:shadow-2xl hover:-translate-y-1 cursor-pointer">Book
           a Session With Our Experts</button>
@@ -556,7 +552,7 @@
       <div
         class="max-w-[1200px] mx-auto px-6 lg:px-24 w-full flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
         <div class="max-w-sm">
-          <a class="block mb-6" href="#"><img
+          <a class="block mb-6" href="index.html"><img
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsX4ZuxrK-Gcyx5cPB7RbV2I8FF4RgHm8apLO_VdmpyN9RNMAzwV3jjC4XmV5Wg-4csON9ZIplW9FhDceoeOv5_EBpKZRh9cu_ZlIxRZ4aNWb15yUJ6oL_AggjU8HEeSuYX8ZPchiexKCePkqY93Z3dlTZV0zELwrHGVdxAqB8eQN3-voN2pXuwnu_N-PqYPR4936TyrQ19tbGFhvGVxVGeFUF-U7q1uNhl4nMi6s25YBIsMDq4lvUBfcYsgfWxskZZ1Po6jxAVZBJ"
               alt="Salon Looha Logo" class="h-24 w-auto object-contain"></a>
           <p class="font-body text-white/80 text-sm leading-relaxed mb-6">A sanctuary of style and rejuvenation.
@@ -565,14 +561,14 @@
       </div>
       <div
         class="max-w-[1200px] mx-auto px-6 lg:px-24 w-full pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="font-label text-xs text-white/60 uppercase tracking-wider">© 2024 SALON SALON LOOHA. DESIGNED FOR
-          DISCERNING CLIENTS.</p>
+        <p class="font-label text-xs text-white/60 uppercase tracking-wider">© 2024 SALON LOOHA. DESIGNED FOR DISCERNING
+          CLIENTS.</p>
       </div>
     </footer>
 
   </main>
 
-  <!-- Popup Modal Engine Container -->
+  <!-- Booking Modal Container -->
   <div id="booking-modal"
     class="fixed inset-0 z-[150] bg-black/60 opacity-0 invisible flex items-center justify-center p-4 backdrop-blur-md">
     <div id="booking-modal-content"
@@ -671,12 +667,10 @@
       const openBodyCta = document.getElementById('open-booking-btn-body');
       const sections = document.querySelectorAll('[data-nav-theme]');
 
-      // Clean Page Load Fade-In Trigger
       setTimeout(() => {
         document.body.classList.add('fade-in');
       }, 50);
 
-      // FIXED: Updated transparent background limits inside applyTheme natively
       const applyTheme = (theme, activeIndex = 5) => {
         if (theme === 'light') {
           navbar.classList.remove('bg-white', 'bg-white/70');
@@ -811,7 +805,7 @@
         });
       }
 
-      // ⚡ INTUITIVE EXIT ANIMATION HANDLER FOR ALL LINKS WITH CROSS-PAGE ANCHOR FIX
+      // ⚡ INTUITIVE EXIT ANIMATION HANDLER WITH STABLE CROSS-ROUTING FIX
       document.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function (e) {
           const href = this.getAttribute('href');
@@ -823,8 +817,12 @@
           if (href.includes('#')) {
             e.preventDefault();
             const parts = href.split('#');
-            const pageTarget = parts[0];
+            let pageTarget = parts[0];
             const hashTarget = '#' + parts[1];
+
+            if (pageTarget === '' || pageTarget === './') {
+              pageTarget = 'index.html';
+            }
 
             localStorage.setItem('scrollTarget', hashTarget);
 
@@ -838,7 +836,7 @@
           }
 
           e.preventDefault();
-          const target = this.href;
+          let target = this.href;
           document.body.classList.remove('fade-in');
           document.body.classList.add('fade-out');
 
@@ -849,7 +847,6 @@
       });
     });
 
-    // ⚡ CLEANLY SEPARATED INDEPENDENT INCOMING DELAYED SCROLL HANDLER 
     window.addEventListener('load', () => {
       const scrollTarget = localStorage.getItem('scrollTarget');
       if (scrollTarget) {
