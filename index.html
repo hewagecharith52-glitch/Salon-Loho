@@ -201,6 +201,11 @@
       animation: map-green-pulse 3s infinite ease-in-out;
     }
 
+    .hero-cinematic-text {
+      color: #1a1c1a !important;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
     .text-premium-backdrop {
       background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(16px);
@@ -410,23 +415,16 @@
     <div class="relative w-full min-h-[calc(100vh-40px-100px)] flex flex-col rounded-t-[32px] overflow-hidden mt-2"
       data-nav-theme="dark">
       <div id="hero-content"
-        class="flex-1 flex flex-col justify-center w-full max-w-[1280px] mx-auto px-8 lg:px-16 relative z-10 pb-20 mt-16 lg:mt-0 transition-all duration-[1.5s] ease-out">
+        class="flex-1 flex flex-col justify-center w-full max-w-[1280px] mx-auto px-8 lg:px-16 relative z-10 pt-[22rem] pb-0 lg:pt-[28rem] lg:pb-2 transition-all duration-[1.5s] ease-out">
         <div class="max-w-4xl mx-auto flex flex-col gap-8 items-center text-center">
-          <div
-            class="text-premium-backdrop px-8 py-10 md:px-12 md:py-12 rounded-[28px] shadow-[0_10px_40px_rgba(0,0,0,0.04)] max-w-3xl mx-auto flex flex-col gap-6">
-            <h1 id="kinetic-title"
-              class="font-display text-5xl lg:text-7xl font-bold text-[#1a1c1a] leading-[1.1] tracking-tight">
-              Your Dream Wedding,<br>Anywhere.
-            </h1>
-            <p class="font-body text-lg text-[#1a1c1a]/85 leading-relaxed font-medium">
-              Expert bridal
-              styling, curated for your destination wedding – bringing luxury beauty services to your dream location,
-              anywhere in the world.</p>
-          </div>
-          <div class="pt-2 flex justify-center w-full">
+          <div class="pt-2 flex flex-col items-center gap-16 w-full">
             <button id="open-booking-btn-hero"
-              class="border-2 border-white hero-white-glow-btn px-12 py-5 text-sm md:text-base tracking-[0.2em] bg-[#adbb98] text-white rounded-full hover:bg-[#9cae86] transition-all shadow-xl hover:-translate-y-1 cursor-pointer font-bold font-label uppercase">Plan
+              class="border-2 border-white hero-white-glow-btn px-12 py-5 text-sm md:text-base tracking-[0.2em] bg-[#adbb98] text-white rounded-full hover:bg-[#9cae86] transition-all shadow-xl hover:-translate-y-1 cursor-pointer font-bold font-label uppercase flex items-center justify-center">Plan
               Your Destination Wedding</button>
+            <a href="#services-section"
+              class="flex items-center justify-center w-12 h-12 rounded-full border border-white/60 bg-white/10 text-white backdrop-blur-sm shadow-lg animate-bounce hover:bg-white hover:text-[#1a1c1a] hover:border-white transition-all duration-300 cursor-pointer">
+              <span class="material-symbols-outlined text-xl font-bold">arrow_downward</span>
+            </a>
           </div>
         </div>
       </div>
@@ -625,7 +623,7 @@
             </div>
             <div class="flex items-center gap-4">
               <span class="material-symbols-outlined text-[#adbb98]">schedule</span>
-              <p class="font-body text-lg text-[#1a1c1a]">Monday – Sunday, 10am – 8pm</p>
+              <p class="font-body text-lg text-[#1a1c1a]">Monday – Sunday, 8.30am – 6.30pm</p>
             </div>
           </div>
           <div class="pt-4">
@@ -671,10 +669,6 @@
             <a class="font-body text-white hover:text-white/70 transition-colors" href="#experts">Our Team</a>
             <a class="font-body text-white hover:text-white/70 transition-colors" href="#gallery-section">Gallery</a>
             <a class="font-body text-white hover:text-white/70 transition-colors" href="#about-section">Contact</a>
-            <div>
-              <a class="font-body price-list-pulse mt-2 text-sm uppercase tracking-wider text-white"
-                href="price_list.pdf" target="_blank">PRICE LIST</a>
-            </div>
           </div>
           <div class="flex flex-col gap-4">
             <h5 class="font-label text-xs uppercase tracking-widest text-white/60 mb-2">Legal</h5>
@@ -934,10 +928,6 @@
           </a>
           <p class="text-[11px] text-[#1a1c1a]/50 text-center mt-2 font-body">Best for international clients (Auto
             Time-Zone conversion)</p>
-          <div class="mt-4 text-center">
-            <a href="price_list.pdf" target="_blank" class="font-label text-xs tracking-[0.15em] price-list-pulse">PRICE
-              LIST</a>
-          </div>
         </div>
         <div class="relative flex py-3 items-center">
           <div class="flex-grow border-t border-black/10"></div>
@@ -1330,7 +1320,6 @@
       };
 
       if (openNavCta) openNavCta.addEventListener('click', openModalGeneral);
-      if (openHeroCta) openHeroCta.addEventListener('click', openModalGeneral);
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
@@ -1399,6 +1388,35 @@
           }, 450);
         });
       });
+
+      const destModal = document.getElementById('destination-modal');
+      const destModalContent = document.getElementById('destination-modal-content');
+      const openDestBtn = document.getElementById('open-booking-btn-hero');
+      const closeDestBtn = document.getElementById('close-destination-btn');
+
+      if (openDestBtn) {
+        openDestBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          destModal.classList.remove('invisible', 'opacity-0');
+          destModal.classList.add('opacity-100');
+          setTimeout(() => destModalContent.classList.add('scale-100'), 10);
+          document.body.style.overflow = 'hidden';
+        });
+      }
+
+      const closeDestModal = () => {
+        destModalContent.classList.remove('scale-100');
+        destModalContent.classList.add('scale-95');
+        destModal.classList.remove('opacity-100');
+        destModal.classList.add('opacity-0');
+        setTimeout(() => {
+          destModal.classList.add('invisible');
+          document.body.style.overflow = '';
+        }, 400);
+      };
+
+      if (closeDestBtn) closeDestBtn.addEventListener('click', closeDestModal);
+      if (destModal) destModal.addEventListener('click', (e) => { if (e.target === destModal) closeDestModal(); });
     });
 
     window.addEventListener('load', () => {
@@ -1469,6 +1487,75 @@
       img.addEventListener('click', () => openLightbox(img));
     });
   </script>
+
+  <!-- 🌸 DESTINATION WEDDING PREMIUM INFO MODAL 🌸 -->
+  <div id="destination-modal"
+    class="fixed inset-0 z-[170] bg-black/70 opacity-0 invisible flex items-center justify-center p-4 backdrop-blur-md transition-all duration-400">
+    <div id="destination-modal-content"
+      class="bg-[#faf9f5] w-full max-w-[650px] rounded-[2.5rem] shadow-2xl border border-black/5 scale-95 relative max-h-[90vh] flex flex-col overflow-hidden transition-all duration-400">
+
+      <!-- Close Button -->
+      <button id="close-destination-btn"
+        class="absolute top-6 right-6 w-10 h-10 rounded-full bg-[#1a1c1a]/5 hover:bg-[#1a1c1a]/10 transition-colors flex items-center justify-center text-[#1a1c1a] z-50 cursor-pointer">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="p-8 lg:p-10 overflow-y-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <span class="material-symbols-outlined text-4xl text-[#adbb98] mb-2">flight_takeoff</span>
+          <h3 class="font-headline text-2xl lg:text-3xl font-bold text-[#1a1c1a] tracking-tight">All-Inclusive
+            Destination Weddings</h3>
+          <p class="font-body text-sm text-[#1a1c1a]/60 mt-1">Luxury bridal & groom services executed flawlessly
+            anywhere in the world.</p>
+        </div>
+
+        <!-- Services Features List -->
+        <div class="flex flex-col gap-5 mb-8">
+          <!-- Feature 1 -->
+          <div class="flex gap-4 items-start bg-white p-4 rounded-2xl border border-black/5 shadow-sm">
+            <span class="material-symbols-outlined text-[#adbb98] bg-[#adbb98]/10 p-2.5 rounded-xl">styler</span>
+            <div>
+              <h4 class="font-headline font-bold text-[#1a1c1a]">Complete Bride & Groom Styling</h4>
+              <p class="font-body text-xs text-[#1a1c1a]/70 mt-0.5">Premium wedding attire dressing, luxury styling, and
+                end-to-end management for both bride and groom to look absolute perfection.</p>
+            </div>
+          </div>
+          <!-- Feature 2 -->
+          <div class="flex gap-4 items-start bg-white p-4 rounded-2xl border border-black/5 shadow-sm">
+            <span class="material-symbols-outlined text-[#adbb98] bg-[#adbb98]/10 p-2.5 rounded-xl">face</span>
+            <div>
+              <h4 class="font-headline font-bold text-[#1a1c1a]">High-End HD & Airbrush Makeup</h4>
+              <p class="font-body text-xs text-[#1a1c1a]/70 mt-0.5">Flawless, long-lasting luxury wedding makeup
+                tailored precisely for international destination weather conditions and high-def cameras.</p>
+            </div>
+          </div>
+          <!-- Feature 3 -->
+          <div class="flex gap-4 items-start bg-white p-4 rounded-2xl border border-black/5 shadow-sm">
+            <span class="material-symbols-outlined text-[#adbb98] bg-[#adbb98]/10 p-2.5 rounded-xl">photo_camera</span>
+            <div>
+              <h4 class="font-headline font-bold text-[#1a1c1a]">Premium Pre-Wedding & Main Photoshoots</h4>
+              <p class="font-body text-xs text-[#1a1c1a]/70 mt-0.5">Complete high-end cinematic photography and
+                videography coverage capturing your beautiful story at your dream location.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Button: Direct to WhatsApp with Package Template Text -->
+        <div class="text-center">
+          <a href="https://api.whatsapp.com/send?phone=94776201254&text=Hello%20Salon%20Looha!%20%F0%9F%8C%B8%20I%20just%20read%20about%20your%20All-Inclusive%20Destination%20Wedding%20Packages%20(Dressing%2C%20Makeup%20%26%20Photoshoot).%20I%20would%20love%20to%20get%20more%20details%20and%20pricing%20for%20my%20wedding!"
+            target="_blank"
+            class="bg-[#25D366] text-white hover:bg-[#20b858] transition-all duration-300 px-6 py-4 rounded-full font-label text-xs font-bold tracking-[0.15em] uppercase shadow-md hover:-translate-y-0.5 flex justify-center items-center gap-2 w-full cursor-pointer">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+            </svg>
+            Discuss Packages via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
